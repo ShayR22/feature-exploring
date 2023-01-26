@@ -55,7 +55,11 @@ int main() {
         std::ranges::sort(vec);
     };
 
-    measure_avg_execution_time("shuffle", shuffle_lambda);
-    measure_avg_execution_time("shuffle and sort", shuffle_sort_lambda);
+    uint32_t nano_took = measure_avg_execution_time_nano("shuffle", shuffle_lambda);
+    printf("nano_took=%u\n", nano_took);
+    nano_took =measure_avg_execution_time_nano("shuffle and sort", shuffle_sort_lambda);
+    printf("nano_took=%u\n", nano_took);
+    nano_took = measure_total_execution_time_nano("shuffle and sort", shuffle_sort_lambda);
+    printf("nano_took=%u\n", nano_took);
     return 0;
 }
