@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <vector>
 #include <cmath>
-#include "tester.hpp"
+#include "../func_measuring/tester.hpp"
 
 static constexpr uint32_t KB_SIZE_BYTES = 1024;
 static constexpr uint32_t MB_SIZE_BYTES = KB_SIZE_BYTES * KB_SIZE_BYTES;
@@ -62,11 +62,11 @@ static void test_allocator() {
     };
 
     if (num_calls == 0) {
-        measure_avg_execution_time(non_fragment_sum);
-        measure_avg_execution_time(fragment_sum);
+        measure_avg_execution_time_nano(non_fragment_sum);
+        measure_avg_execution_time_nano(fragment_sum);
     } else {
-        measure_avg_execution_time(non_fragment_sum, num_calls);
-        measure_avg_execution_time(fragment_sum, num_calls);
+        measure_avg_execution_time_nano(non_fragment_sum, num_calls);
+        measure_avg_execution_time_nano(fragment_sum, num_calls);
     }
 }
 
