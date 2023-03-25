@@ -2,6 +2,13 @@
 
 #include <vector>
 #include <memory>
+#include <cstring>
+
+template<typename T>
+void memcpy_container(std::vector<T>& dst_container, const std::vector<T>& src_container) {
+    const size_t num_bytes_copied = std::min(dst_container.size(), src_container.size()) * sizeof(T);
+    std::memcpy(dst_container.data(), src_container.data(), num_bytes_copied);
+}
 
 static inline void sum_container(const auto& container, const uint32_t size) {
     uint64_t sum = 0;
@@ -15,20 +22,21 @@ static inline void sum_container(const auto& container, const uint32_t size) {
 }
 
 static void run_allocation_tests(uint32_t allocation_size) {
+    // all allocation are of number uint32, thus /4
+    allocation_size = allocation_size / 4;
+
     auto allocate_vec_resize = [&]() {
         std::vector<uint32_t> vec;
         vec.resize(allocation_size);
-        sum_container(vec, allocation_size);
+        sum_container(vec, 10);
     };
 
     auto allocate_vec_ctor = [&]() {
         std::vector<uint32_t> vec(allocation_size);
-        sum_container(vec, allocation_size);
     };
 
     auto allocate_buffer = [&]() {
         auto buffer = std::make_unique<uint32_t[]>(allocation_size);
-        sum_container(buffer, allocation_size);
     };
 
     bool err = false;
@@ -41,15 +49,20 @@ static void run_allocation_tests(uint32_t allocation_size) {
             return;
         }
         uint8_t buffer[allocation_size];
-        sum_container(reinterpret_cast<uint8_t*>(buffer), allocation_size);
     };
 
     std::vector<uint32_t> sum_vec(allocation_size);
     for (uint32_t i = 0; i < allocation_size; i++) {
         sum_vec[i] = i;
     }
+
     auto container_sum = [&]() {
         sum_container(sum_vec, allocation_size);
+    };
+
+    std::vector<uint32_t> dest_vec(allocation_size);
+    auto memcpy_containers = [&]() {
+        memcpy_container(dest_vec, sum_vec);
     };
 
     RUN_TEST(container_sum);
@@ -57,6 +70,7 @@ static void run_allocation_tests(uint32_t allocation_size) {
     RUN_TEST(allocate_vec_ctor);
     RUN_TEST(allocate_buffer);
     RUN_TEST(allocate_stack);
+    RUN_TEST(memcpy_containers);
 }
 
 static void print_going_to(uint32_t allocation_size) {
