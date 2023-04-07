@@ -1,0 +1,19 @@
+@startuml cli_dc
+
+
+class CliSpiBusNumber
+class CliMySpiDev
+
+class CliMySpiDev
+class SpiComm
+class SpiBus
+
+
+MySpiDev -d-> SpiComm
+SpiComm -d-> SpiBus
+CliMySpiDev -d-> CliSpiBusNumber : uses
+CliMySpiDev -l-> MySpiDev: creates using static function in runtime
+
+@enduml
+
+
