@@ -3,6 +3,7 @@
 #include "../cli11/CLI11.hpp"
 #include "my_spi_device.hpp"
 #include "cli_spi_bus_number.hpp"
+#include "cli_runner.hpp"
 #include <cstdint>
 #include <cstdio>
 
@@ -18,19 +19,7 @@ public:
     }
 
     int run(int argc, char **argv) {
-        // run the CLI
-        try {
-            _app.parse(argc, argv);
-        } catch (const CLI::ParseError& e) {
-            return _app.exit(e);
-        }
-
-        // if no subcommands given display help message
-        if (_app.get_subcommands().size() == 0 ){
-            printf("%s\n", _app.help().c_str());
-        }
-
-        return 0;
+        return CliRunner::run(_app, argc, argv);
     }
 
 private:
