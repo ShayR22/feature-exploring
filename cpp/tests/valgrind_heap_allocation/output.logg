@@ -1,0 +1,190 @@
+--------------------------------------------------------------------------------
+Profile data file 'xtmemory.kcg.371' (creator: xtree-1)
+--------------------------------------------------------------------------------
+Profiled target:  ./a.out 1048576 10 (PID 371)
+Events recorded:  curB curBk totB totBk totFdB totFdBk
+Events shown:     curB curBk totB totBk totFdB totFdBk
+Event sort order: curB curBk totB totBk totFdB totFdBk
+Thresholds:       100 100 100 100 100 100
+Include dirs:     
+User annotated:   
+Auto-annotation:  on
+
+--------------------------------------------------------------------------------
+curB       curBk      totB                   totBk           totFdB                 totFdBk         
+--------------------------------------------------------------------------------
+0          0          4,227,928,704 (100.0%) 17,282 (100.0%) 4,227,928,704 (100.0%) 17,282 (100.0%)  PROGRAM TOTALS
+
+--------------------------------------------------------------------------------
+curB       curBk      totB                   totBk            totFdB                 totFdBk           file:function
+--------------------------------------------------------------------------------
+0          0          4,227,854,976 (100.0%)  17,280 (99.99%) 4,227,854,976 (100.0%)  17,280 (99.99%)  main.cpp:main
+0          0          4,227,854,976 (100.0%)  17,280 (99.99%)             0                0           /usr/include/c++/11/ext/new_allocator.h:printer(char const*, unsigned int)
+0          0          4,227,785,856 (100.0%) 164,448 (951.6%) 4,227,785,856 (100.0%) 164,448 (951.6%)  main.cpp:printer(char const*, unsigned int)
+0          0                436,224 ( 0.01%)       6 ( 0.03%)             0                0           UnknownFile???:UnknownFn???
+0          0                 72,704 ( 0.00%)       1 ( 0.01%)             0                0           ./elf/./elf/dl-init.c:_dl_init
+0          0                 72,704 ( 0.00%)       1 ( 0.01%)             0                0           ./elf/./elf/dl-init.c:call_init.part.0
+0          0                  1,024 ( 0.00%)       1 ( 0.01%)             0                0           ./debug/./debug/printf_chk.c:__printf_chk
+0          0                  1,024 ( 0.00%)       1 ( 0.01%)             0                0           ./libio/./libio/filedoalloc.c:_IO_file_doallocate
+0          0                  1,024 ( 0.00%)       1 ( 0.01%)             0                0           ./libio/./libio/fileops.c:_IO_file_overflow@@GLIBC_2.2.5
+0          0                  1,024 ( 0.00%)       1 ( 0.01%)             0                0           ./libio/./libio/fileops.c:_IO_file_xsputn@@GLIBC_2.2.5
+0          0                  1,024 ( 0.00%)       1 ( 0.01%)             0                0           ./libio/./libio/genops.c:_IO_doallocbuf
+0          0                  1,024 ( 0.00%)       1 ( 0.01%)             0                0           ./stdio-common/./stdio-common/vfprintf-internal.c:__vfprintf_internal
+0          0                  1,024 ( 0.00%)       1 ( 0.01%)             0                0           /usr/include/x86_64-linux-gnu/bits/stdio2.h:main
+0          0                      0                0                 73,728 ( 0.00%)       2 ( 0.01%)  ./csu/../sysdeps/nptl/libc_start_call_main.h:(below main)
+0          0                      0                0                 73,728 ( 0.00%)       2 ( 0.01%)  ./stdlib/./stdlib/exit.c:__run_exit_handlers
+0          0                      0                0                 73,728 ( 0.00%)       2 ( 0.01%)  ./stdlib/./stdlib/exit.c:exit
+0          0                      0                0                 73,728 ( 0.00%)       2 ( 0.01%)  /home/shay/valgrind/valgrind-3.20.0/coregrind/vg_preloaded.c:_vgnU_freeres
+0          0                      0                0                 72,704 ( 0.00%)       1 ( 0.01%)  UnknownFile???:__gnu_cxx::__freeres()
+0          0                      0                0                  1,024 ( 0.00%)       1 ( 0.01%)  UnknownFile???:__libc_freeres
+0          0                      0                0                  1,024 ( 0.00%)       1 ( 0.01%)  UnknownFile???:buffer_free
+
+--------------------------------------------------------------------------------
+-- Auto-annotated source: /usr/include/x86_64-linux-gnu/bits/stdio2.h
+--------------------------------------------------------------------------------
+curB       curBk      totB           totBk      totFdB     totFdBk    
+
+-- line 104 ----------------------------------------
+.          .              .          .          .          .           {
+.          .              .          .          .          .             return __fprintf_chk (__stream, __USE_FORTIFY_LEVEL - 1, __fmt,
+.          .              .          .          .          .           			__va_arg_pack ());
+.          .              .          .          .          .           }
+.          .              .          .          .          .           
+.          .              .          .          .          .           __fortify_function int
+.          .              .          .          .          .           printf (const char *__restrict __fmt, ...)
+.          .              .          .          .          .           {
+0          0          1,024 ( 0.00%) 1 ( 0.01%) 0          0             return __printf_chk (__USE_FORTIFY_LEVEL - 1, __fmt, __va_arg_pack ());
+.          .              .          .          .          .           }
+.          .              .          .          .          .           # elif !defined __cplusplus
+.          .              .          .          .          .           #  define printf(...) \
+.          .              .          .          .          .             __printf_chk (__USE_FORTIFY_LEVEL - 1, __VA_ARGS__)
+.          .              .          .          .          .           #  define fprintf(stream, ...) \
+.          .              .          .          .          .             __fprintf_chk (stream, __USE_FORTIFY_LEVEL - 1, __VA_ARGS__)
+.          .              .          .          .          .           # endif
+.          .              .          .          .          .           
+-- line 120 ----------------------------------------
+
+--------------------------------------------------------------------------------
+-- Auto-annotated source: /home/shay/valgrind/valgrind-3.20.0/coregrind/vg_preloaded.c
+--------------------------------------------------------------------------------
+curB       curBk      totB       totBk      totFdB          totFdBk    
+
+-- line 64 ----------------------------------------
+.          .          .          .               .          .                 && !defined(VGPV_x86_linux_android) \
+.          .          .          .               .          .                 && !defined(VGPV_mips32_linux_android) \
+.          .          .          .               .          .                 && !defined(VGPV_arm64_linux_android)
+.          .          .          .               .          .           
+.          .          .          .               .          .              /* g++ mangled __gnu_cxx::__freeres yields -> _ZN9__gnu_cxx9__freeresEv */
+.          .          .          .               .          .              extern void _ZN9__gnu_cxx9__freeresEv(void) __attribute__((weak));
+.          .          .          .               .          .              if (((to_run & VG_RUN__GNU_CXX__FREERES) != 0) &&
+.          .          .          .               .          .                  (_ZN9__gnu_cxx9__freeresEv != NULL)) {
+0          0          0          0          72,704 ( 0.00%) 1 ( 0.01%)        _ZN9__gnu_cxx9__freeresEv();
+.          .          .          .               .          .              }
+.          .          .          .               .          .           
+.          .          .          .               .          .              extern void __libc_freeres(void) __attribute__((weak));
+.          .          .          .               .          .              if (((to_run & VG_RUN__LIBC_FREERES) != 0) &&
+.          .          .          .               .          .                  (__libc_freeres != NULL)) {
+0          0          0          0           1,024 ( 0.00%) 1 ( 0.01%)        __libc_freeres();
+.          .          .          .               .          .              }
+.          .          .          .               .          .           
+.          .          .          .               .          .           #  endif
+.          .          .          .               .          .           
+.          .          .          .               .          .              VALGRIND_DO_CLIENT_REQUEST_STMT(VG_USERREQ__FREERES_DONE, 0, 0, 0, 0, 0);
+.          .          .          .               .          .              /*NOTREACHED*/
+.          .          .          .               .          .              *(volatile int *)0 = 'x';
+.          .          .          .               .          .           }
+-- line 86 ----------------------------------------
+
+--------------------------------------------------------------------------------
+-- Auto-annotated source: main.cpp
+--------------------------------------------------------------------------------
+curB       curBk      totB                   totBk            totFdB                 totFdBk          
+
+-- line 33 ----------------------------------------
+.          .                      .                .                      .                .               }
+.          .                      .                .                      .                .           
+.          .                      .                .                      .                .               std::vector<uint32_t> numbers(size);
+.          .                      .                .                      .                .               for (uint32_t i = 0; i < numbers.size(); i++) {
+.          .                      .                .                      .                .                   numbers[i] = i; //rand_in_range(0, 255);
+.          .                      .                .                      .                .               }
+.          .                      .                .                      .                .               iterate(nullptr, numbers);
+.          .                      .                .                      .                .           
+0          0          4,227,785,856 (100.0%) 164,448 (951.6%) 4,227,785,856 (100.0%) 164,448 (951.6%)      printer(name, size/2);
+.          .                      .                .                      .                .           }
+.          .                      .                .                      .                .           
+.          .                      .                .                      .                .           class C {
+.          .                      .                .                      .                .           public:
+.          .                      .                .                      .                .               C(uint32_t size) {
+.          .                      .                .                      .                .                   // printf("C::size=%u", size);
+0          0            603,978,624 (14.29%)   5,472 (31.66%)   603,978,624 (14.29%)   5,472 (31.66%)          printer(__func__, size);
+.          .                      .                .                      .                .               }
+.          .                      .                .                      .                .           };
+.          .                      .                .                      .                .           
+.          .                      .                .                      .                .           class B {
+.          .                      .                .                      .                .           public:
+.          .                      .                .                      .                .               B(uint32_t size) {
+.          .                      .                .                      .                .                   // printf("B::size=%u", size);
+0          0          1,207,958,400 (28.57%)   5,760 (33.33%) 1,207,958,400 (28.57%)   5,760 (33.33%)          printer(__func__, size);
+.          .                      .                .                      .                .                   C c(size/2);
+.          .                      .                .                      .                .               }
+.          .                      .                .                      .                .           };
+.          .                      .                .                      .                .           
+.          .                      .                .                      .                .           
+.          .                      .                .                      .                .           class A {
+.          .                      .                .                      .                .           public:
+.          .                      .                .                      .                .               A(uint32_t size) {
+.          .                      .                .                      .                .                   // printf("A::size=%u", size);
+0          0          2,415,917,952 (57.14%)   6,048 (35.00%) 2,415,917,952 (57.14%)   6,048 (35.00%)          printer(__func__, size);
+.          .                      .                .                      .                .                   B b(size/2);
+.          .                      .                .                      .                .               }
+.          .                      .                .                      .                .           };
+.          .                      .                .                      .                .           
+.          .                      .                .                      .                .           
+.          .                      .                .                      .                .           bool has_time_passed(const auto& start, const auto now, const uint32_t seconds) {
+.          .                      .                .                      .                .               auto micro_duration = std::chrono::duration_cast<std::chrono::microseconds>(now - start);
+.          .                      .                .                      .                .               auto micro_passed = micro_duration.count();
+-- line 74 ----------------------------------------
+
+--------------------------------------------------------------------------------
+-- Auto-annotated source: /usr/include/c++/11/ext/new_allocator.h
+--------------------------------------------------------------------------------
+curB       curBk      totB                   totBk           totFdB     totFdBk    
+
+-- line 119 ----------------------------------------
+.          .                      .               .          .          .           
+.          .                      .               .          .          .           #if __cpp_aligned_new
+.          .                      .               .          .          .           	if (alignof(_Tp) > __STDCPP_DEFAULT_NEW_ALIGNMENT__)
+.          .                      .               .          .          .           	  {
+.          .                      .               .          .          .           	    std::align_val_t __al = std::align_val_t(alignof(_Tp));
+.          .                      .               .          .          .           	    return static_cast<_Tp*>(::operator new(__n * sizeof(_Tp), __al));
+.          .                      .               .          .          .           	  }
+.          .                      .               .          .          .           #endif
+0          0          4,227,854,976 (100.0%) 17,280 (99.99%) 0          0           	return static_cast<_Tp*>(::operator new(__n * sizeof(_Tp)));
+.          .                      .               .          .          .                 }
+.          .                      .               .          .          .           
+.          .                      .               .          .          .                 // __p is not permitted to be a null pointer.
+.          .                      .               .          .          .                 void
+.          .                      .               .          .          .                 deallocate(_Tp* __p, size_type __t __attribute__ ((__unused__)))
+.          .                      .               .          .          .                 {
+.          .                      .               .          .          .           #if __cpp_aligned_new
+.          .                      .               .          .          .           	if (alignof(_Tp) > __STDCPP_DEFAULT_NEW_ALIGNMENT__)
+-- line 135 ----------------------------------------
+
+--------------------------------------------------------------------------------
+The following files chosen for auto-annotation could not be found:
+--------------------------------------------------------------------------------
+  ./csu/../sysdeps/nptl/libc_start_call_main.h
+  ./debug/./debug/printf_chk.c
+  ./elf/./elf/dl-init.c
+  ./libio/./libio/filedoalloc.c
+  ./libio/./libio/fileops.c
+  ./libio/./libio/genops.c
+  ./stdio-common/./stdio-common/vfprintf-internal.c
+  ./stdlib/./stdlib/exit.c
+  UnknownFile???
+
+--------------------------------------------------------------------------------
+curB       curBk      totB                    totBk            totFdB                 totFdBk          
+--------------------------------------------------------------------------------
+0          0          12,683,496,832 (100.0%) 199,009 (100.0%) 8,455,714,560 (100.0%) 181,730 (100.0%)  events annotated
+

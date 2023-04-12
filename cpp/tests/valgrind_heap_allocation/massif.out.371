@@ -1,0 +1,782 @@
+desc: --xtree-memory=full
+cmd: ./a.out 1048576 10
+time_unit: i
+#-----------
+snapshot=0
+#-----------
+time=0
+mem_heap_B=0
+mem_heap_extra_B=0
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=1
+#-----------
+time=21141259
+mem_heap_B=8462332
+mem_heap_extra_B=4236
+mem_stacks_B=0
+heap_tree=peak
+n2: 8462332 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 8388604 0x109385: allocate (new_allocator.h:127)
+  n1: 8388604 0x109385: allocate (allocator.h:185)
+   n1: 8388604 0x109385: allocate (alloc_traits.h:464)
+    n1: 8388604 0x109385: _M_allocate (stl_vector.h:346)
+     n1: 8388604 0x109385: _M_allocate (stl_vector.h:343)
+      n1: 8388604 0x109385: _M_create_storage (stl_vector.h:361)
+       n1: 8388604 0x109385: _Vector_base (stl_vector.h:305)
+        n1: 8388604 0x109385: vector (stl_vector.h:511)
+         n2: 8388604 0x109385: printer(char const*, unsigned int) (main.cpp:35)
+          n1: 4194304 0x1091E1: A (main.cpp:66)
+           n0: 4194304 0x1091E1: main (main.cpp:94)
+          n2: 4194300 0x1093E4: printer(char const*, unsigned int) (main.cpp:41)
+           n1: 2097152 0x1091E1: A (main.cpp:66)
+            n0: 2097152 0x1091E1: main (main.cpp:94)
+           n2: 2097148 0x1093E4: printer(char const*, unsigned int) (main.cpp:41)
+            n1: 1048576 0x1091E1: A (main.cpp:66)
+             n0: 1048576 0x1091E1: main (main.cpp:94)
+            n2: 1048572 0x1093E4: printer(char const*, unsigned int) (main.cpp:41)
+             n1: 524288 0x1091E1: A (main.cpp:66)
+              n0: 524288 0x1091E1: main (main.cpp:94)
+             n2: 524284 0x1093E4: printer(char const*, unsigned int) (main.cpp:41)
+              n1: 262144 0x1091E1: A (main.cpp:66)
+               n0: 262144 0x1091E1: main (main.cpp:94)
+              n2: 262140 0x1093E4: printer(char const*, unsigned int) (main.cpp:41)
+               n1: 131072 0x1091E1: A (main.cpp:66)
+                n0: 131072 0x1091E1: main (main.cpp:94)
+               n1: 131068 0x1093E4: printer(char const*, unsigned int) (main.cpp:41)
+                n0: 131068 in 2 places, all below massif's threshold (1.00%)
+ n0: 73728 in 2 places, all below massif's threshold (1.00%)
+#-----------
+snapshot=2
+#-----------
+time=275953770
+mem_heap_B=6365184
+mem_heap_extra_B=4064
+mem_stacks_B=0
+heap_tree=detailed
+n3: 6365184 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 6291456 0x109385: allocate (new_allocator.h:127)
+  n1: 6291456 0x109385: allocate (allocator.h:185)
+   n1: 6291456 0x109385: allocate (alloc_traits.h:464)
+    n1: 6291456 0x109385: _M_allocate (stl_vector.h:346)
+     n1: 6291456 0x109385: _M_allocate (stl_vector.h:343)
+      n1: 6291456 0x109385: _M_create_storage (stl_vector.h:361)
+       n1: 6291456 0x109385: _Vector_base (stl_vector.h:305)
+        n1: 6291456 0x109385: vector (stl_vector.h:511)
+         n3: 6291456 0x109385: printer(char const*, unsigned int) (main.cpp:35)
+          n1: 4194304 0x1091E1: A (main.cpp:66)
+           n0: 4194304 0x1091E1: main (main.cpp:94)
+          n2: 2097152 0x1093E4: printer(char const*, unsigned int) (main.cpp:41)
+           n1: 2097152 0x1091E1: A (main.cpp:66)
+            n0: 2097152 0x1091E1: main (main.cpp:94)
+           n0: 0 in 3 places, all below massif's threshold (1.00%)
+          n0: 0 in 2 places, all below massif's threshold (1.00%)
+ n1: 72704 0x490A979: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30)
+  n1: 72704 0x400647D: call_init.part.0 (dl-init.c:70)
+   n1: 72704 0x4006567: call_init (dl-init.c:33)
+    n1: 72704 0x4006567: _dl_init (dl-init.c:117)
+     n1: 72704 0x40202E9: ??? (in /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2)
+      n1: 72704 0x2: ???
+       n1: 72704 0x1FFF0004A6: ???
+        n1: 72704 0x1FFF0004AE: ???
+         n0: 72704 0x1FFF0004B6: ???
+ n0: 1024 in 1 place, below massif's threshold (1.00%)
+#-----------
+snapshot=3
+#-----------
+time=481218948
+mem_heap_B=7938048
+mem_heap_extra_B=4080
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=4
+#-----------
+time=613343584
+mem_heap_B=7938048
+mem_heap_extra_B=4080
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=5
+#-----------
+time=745468220
+mem_heap_B=7938048
+mem_heap_extra_B=4080
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=6
+#-----------
+time=908264551
+mem_heap_B=7413760
+mem_heap_extra_B=4072
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=7
+#-----------
+time=1040389187
+mem_heap_B=7413760
+mem_heap_extra_B=4072
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=8
+#-----------
+time=1172513823
+mem_heap_B=7413760
+mem_heap_extra_B=4072
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=9
+#-----------
+time=1304638459
+mem_heap_B=7413760
+mem_heap_extra_B=4072
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=10
+#-----------
+time=1436763095
+mem_heap_B=7413760
+mem_heap_extra_B=4072
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=11
+#-----------
+time=1568887731
+mem_heap_B=7413760
+mem_heap_extra_B=4072
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=12
+#-----------
+time=1701012367
+mem_heap_B=7413760
+mem_heap_extra_B=4072
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=13
+#-----------
+time=1833137003
+mem_heap_B=7413760
+mem_heap_extra_B=4072
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=14
+#-----------
+time=1965261639
+mem_heap_B=7413760
+mem_heap_extra_B=4072
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=15
+#-----------
+time=2097386275
+mem_heap_B=7413760
+mem_heap_extra_B=4072
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=16
+#-----------
+time=2229510911
+mem_heap_B=7413760
+mem_heap_extra_B=4072
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=17
+#-----------
+time=2361635547
+mem_heap_B=7413760
+mem_heap_extra_B=4072
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=18
+#-----------
+time=2493760183
+mem_heap_B=7413760
+mem_heap_extra_B=4072
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=19
+#-----------
+time=2625884819
+mem_heap_B=7413760
+mem_heap_extra_B=4072
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=20
+#-----------
+time=2758009455
+mem_heap_B=7413760
+mem_heap_extra_B=4072
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=21
+#-----------
+time=2890134091
+mem_heap_B=7413760
+mem_heap_extra_B=4072
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=22
+#-----------
+time=3022258727
+mem_heap_B=7413760
+mem_heap_extra_B=4072
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=23
+#-----------
+time=3154383363
+mem_heap_B=7413760
+mem_heap_extra_B=4072
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=24
+#-----------
+time=3286507999
+mem_heap_B=7413760
+mem_heap_extra_B=4072
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=25
+#-----------
+time=3418632635
+mem_heap_B=7413760
+mem_heap_extra_B=4072
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=26
+#-----------
+time=3550757271
+mem_heap_B=7413760
+mem_heap_extra_B=4072
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=27
+#-----------
+time=3682881907
+mem_heap_B=7413760
+mem_heap_extra_B=4072
+mem_stacks_B=0
+heap_tree=detailed
+n2: 7413760 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 7340032 0x109385: allocate (new_allocator.h:127)
+  n1: 7340032 0x109385: allocate (allocator.h:185)
+   n1: 7340032 0x109385: allocate (alloc_traits.h:464)
+    n1: 7340032 0x109385: _M_allocate (stl_vector.h:346)
+     n1: 7340032 0x109385: _M_allocate (stl_vector.h:343)
+      n1: 7340032 0x109385: _M_create_storage (stl_vector.h:361)
+       n1: 7340032 0x109385: _Vector_base (stl_vector.h:305)
+        n1: 7340032 0x109385: vector (stl_vector.h:511)
+         n3: 7340032 0x109385: printer(char const*, unsigned int) (main.cpp:35)
+          n1: 4194304 0x1091E1: A (main.cpp:66)
+           n0: 4194304 0x1091E1: main (main.cpp:94)
+          n3: 3145728 0x1093E4: printer(char const*, unsigned int) (main.cpp:41)
+           n1: 2097152 0x1091E1: A (main.cpp:66)
+            n0: 2097152 0x1091E1: main (main.cpp:94)
+           n2: 1048576 0x1093E4: printer(char const*, unsigned int) (main.cpp:41)
+            n1: 1048576 0x1091E1: A (main.cpp:66)
+             n0: 1048576 0x1091E1: main (main.cpp:94)
+            n0: 0 in 3 places, all below massif's threshold (1.00%)
+           n0: 0 in 2 places, all below massif's threshold (1.00%)
+          n0: 0 in 2 places, all below massif's threshold (1.00%)
+ n0: 73728 in 2 places, all below massif's threshold (1.00%)
+#-----------
+snapshot=28
+#-----------
+time=3815006543
+mem_heap_B=7413760
+mem_heap_extra_B=4072
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=29
+#-----------
+time=3947131179
+mem_heap_B=7413760
+mem_heap_extra_B=4072
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=30
+#-----------
+time=4079255815
+mem_heap_B=7413760
+mem_heap_extra_B=4072
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=31
+#-----------
+time=4211380451
+mem_heap_B=7413760
+mem_heap_extra_B=4072
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=32
+#-----------
+time=4343505087
+mem_heap_B=7413760
+mem_heap_extra_B=4072
+mem_stacks_B=0
+heap_tree=detailed
+n2: 7413760 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 7340032 0x109385: allocate (new_allocator.h:127)
+  n1: 7340032 0x109385: allocate (allocator.h:185)
+   n1: 7340032 0x109385: allocate (alloc_traits.h:464)
+    n1: 7340032 0x109385: _M_allocate (stl_vector.h:346)
+     n1: 7340032 0x109385: _M_allocate (stl_vector.h:343)
+      n1: 7340032 0x109385: _M_create_storage (stl_vector.h:361)
+       n1: 7340032 0x109385: _Vector_base (stl_vector.h:305)
+        n1: 7340032 0x109385: vector (stl_vector.h:511)
+         n3: 7340032 0x109385: printer(char const*, unsigned int) (main.cpp:35)
+          n1: 4194304 0x1091E1: A (main.cpp:66)
+           n0: 4194304 0x1091E1: main (main.cpp:94)
+          n3: 3145728 0x1093E4: printer(char const*, unsigned int) (main.cpp:41)
+           n1: 2097152 0x1091E1: A (main.cpp:66)
+            n0: 2097152 0x1091E1: main (main.cpp:94)
+           n2: 1048576 0x1093E4: printer(char const*, unsigned int) (main.cpp:41)
+            n1: 1048576 0x1091E1: A (main.cpp:66)
+             n0: 1048576 0x1091E1: main (main.cpp:94)
+            n0: 0 in 3 places, all below massif's threshold (1.00%)
+           n0: 0 in 2 places, all below massif's threshold (1.00%)
+          n0: 0 in 2 places, all below massif's threshold (1.00%)
+ n0: 73728 in 2 places, all below massif's threshold (1.00%)
+#-----------
+snapshot=33
+#-----------
+time=4475629723
+mem_heap_B=7413760
+mem_heap_extra_B=4072
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=34
+#-----------
+time=4607754359
+mem_heap_B=7413760
+mem_heap_extra_B=4072
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=35
+#-----------
+time=4739878995
+mem_heap_B=7413760
+mem_heap_extra_B=4072
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=36
+#-----------
+time=4872003631
+mem_heap_B=7413760
+mem_heap_extra_B=4072
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=37
+#-----------
+time=5004128267
+mem_heap_B=7413760
+mem_heap_extra_B=4072
+mem_stacks_B=0
+heap_tree=detailed
+n2: 7413760 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 7340032 0x109385: allocate (new_allocator.h:127)
+  n1: 7340032 0x109385: allocate (allocator.h:185)
+   n1: 7340032 0x109385: allocate (alloc_traits.h:464)
+    n1: 7340032 0x109385: _M_allocate (stl_vector.h:346)
+     n1: 7340032 0x109385: _M_allocate (stl_vector.h:343)
+      n1: 7340032 0x109385: _M_create_storage (stl_vector.h:361)
+       n1: 7340032 0x109385: _Vector_base (stl_vector.h:305)
+        n1: 7340032 0x109385: vector (stl_vector.h:511)
+         n3: 7340032 0x109385: printer(char const*, unsigned int) (main.cpp:35)
+          n1: 4194304 0x1091E1: A (main.cpp:66)
+           n0: 4194304 0x1091E1: main (main.cpp:94)
+          n3: 3145728 0x1093E4: printer(char const*, unsigned int) (main.cpp:41)
+           n1: 2097152 0x1091E1: A (main.cpp:66)
+            n0: 2097152 0x1091E1: main (main.cpp:94)
+           n2: 1048576 0x1093E4: printer(char const*, unsigned int) (main.cpp:41)
+            n1: 1048576 0x1091E1: A (main.cpp:66)
+             n0: 1048576 0x1091E1: main (main.cpp:94)
+            n0: 0 in 3 places, all below massif's threshold (1.00%)
+           n0: 0 in 2 places, all below massif's threshold (1.00%)
+          n0: 0 in 2 places, all below massif's threshold (1.00%)
+ n0: 73728 in 2 places, all below massif's threshold (1.00%)
+#-----------
+snapshot=38
+#-----------
+time=5136252903
+mem_heap_B=7413760
+mem_heap_extra_B=4072
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=39
+#-----------
+time=5268377539
+mem_heap_B=7413760
+mem_heap_extra_B=4072
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=40
+#-----------
+time=5400502175
+mem_heap_B=7413760
+mem_heap_extra_B=4072
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=41
+#-----------
+time=5532626811
+mem_heap_B=7413760
+mem_heap_extra_B=4072
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=42
+#-----------
+time=5664751447
+mem_heap_B=7413760
+mem_heap_extra_B=4072
+mem_stacks_B=0
+heap_tree=detailed
+n2: 7413760 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 7340032 0x109385: allocate (new_allocator.h:127)
+  n1: 7340032 0x109385: allocate (allocator.h:185)
+   n1: 7340032 0x109385: allocate (alloc_traits.h:464)
+    n1: 7340032 0x109385: _M_allocate (stl_vector.h:346)
+     n1: 7340032 0x109385: _M_allocate (stl_vector.h:343)
+      n1: 7340032 0x109385: _M_create_storage (stl_vector.h:361)
+       n1: 7340032 0x109385: _Vector_base (stl_vector.h:305)
+        n1: 7340032 0x109385: vector (stl_vector.h:511)
+         n3: 7340032 0x109385: printer(char const*, unsigned int) (main.cpp:35)
+          n1: 4194304 0x1091E1: A (main.cpp:66)
+           n0: 4194304 0x1091E1: main (main.cpp:94)
+          n3: 3145728 0x1093E4: printer(char const*, unsigned int) (main.cpp:41)
+           n1: 2097152 0x1091E1: A (main.cpp:66)
+            n0: 2097152 0x1091E1: main (main.cpp:94)
+           n2: 1048576 0x1093E4: printer(char const*, unsigned int) (main.cpp:41)
+            n1: 1048576 0x1091E1: A (main.cpp:66)
+             n0: 1048576 0x1091E1: main (main.cpp:94)
+            n0: 0 in 3 places, all below massif's threshold (1.00%)
+           n0: 0 in 2 places, all below massif's threshold (1.00%)
+          n0: 0 in 2 places, all below massif's threshold (1.00%)
+ n0: 73728 in 2 places, all below massif's threshold (1.00%)
+#-----------
+snapshot=43
+#-----------
+time=5796876083
+mem_heap_B=7413760
+mem_heap_extra_B=4072
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=44
+#-----------
+time=5929000719
+mem_heap_B=7413760
+mem_heap_extra_B=4072
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=45
+#-----------
+time=6061125355
+mem_heap_B=7413760
+mem_heap_extra_B=4072
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=46
+#-----------
+time=6193249991
+mem_heap_B=7413760
+mem_heap_extra_B=4072
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=47
+#-----------
+time=6325374627
+mem_heap_B=7413760
+mem_heap_extra_B=4072
+mem_stacks_B=0
+heap_tree=detailed
+n2: 7413760 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 7340032 0x109385: allocate (new_allocator.h:127)
+  n1: 7340032 0x109385: allocate (allocator.h:185)
+   n1: 7340032 0x109385: allocate (alloc_traits.h:464)
+    n1: 7340032 0x109385: _M_allocate (stl_vector.h:346)
+     n1: 7340032 0x109385: _M_allocate (stl_vector.h:343)
+      n1: 7340032 0x109385: _M_create_storage (stl_vector.h:361)
+       n1: 7340032 0x109385: _Vector_base (stl_vector.h:305)
+        n1: 7340032 0x109385: vector (stl_vector.h:511)
+         n3: 7340032 0x109385: printer(char const*, unsigned int) (main.cpp:35)
+          n1: 4194304 0x1091E1: A (main.cpp:66)
+           n0: 4194304 0x1091E1: main (main.cpp:94)
+          n3: 3145728 0x1093E4: printer(char const*, unsigned int) (main.cpp:41)
+           n1: 2097152 0x1091E1: A (main.cpp:66)
+            n0: 2097152 0x1091E1: main (main.cpp:94)
+           n2: 1048576 0x1093E4: printer(char const*, unsigned int) (main.cpp:41)
+            n1: 1048576 0x1091E1: A (main.cpp:66)
+             n0: 1048576 0x1091E1: main (main.cpp:94)
+            n0: 0 in 3 places, all below massif's threshold (1.00%)
+           n0: 0 in 2 places, all below massif's threshold (1.00%)
+          n0: 0 in 2 places, all below massif's threshold (1.00%)
+ n0: 73728 in 2 places, all below massif's threshold (1.00%)
+#-----------
+snapshot=48
+#-----------
+time=6457499263
+mem_heap_B=7413760
+mem_heap_extra_B=4072
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=49
+#-----------
+time=6655686217
+mem_heap_B=7413760
+mem_heap_extra_B=4072
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=50
+#-----------
+time=6787810853
+mem_heap_B=7413760
+mem_heap_extra_B=4072
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=51
+#-----------
+time=6919935489
+mem_heap_B=7413760
+mem_heap_extra_B=4072
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=52
+#-----------
+time=7052060125
+mem_heap_B=7413760
+mem_heap_extra_B=4072
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=53
+#-----------
+time=7184184761
+mem_heap_B=7413760
+mem_heap_extra_B=4072
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=54
+#-----------
+time=7316309397
+mem_heap_B=7413760
+mem_heap_extra_B=4072
+mem_stacks_B=0
+heap_tree=detailed
+n2: 7413760 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 7340032 0x109385: allocate (new_allocator.h:127)
+  n1: 7340032 0x109385: allocate (allocator.h:185)
+   n1: 7340032 0x109385: allocate (alloc_traits.h:464)
+    n1: 7340032 0x109385: _M_allocate (stl_vector.h:346)
+     n1: 7340032 0x109385: _M_allocate (stl_vector.h:343)
+      n1: 7340032 0x109385: _M_create_storage (stl_vector.h:361)
+       n1: 7340032 0x109385: _Vector_base (stl_vector.h:305)
+        n1: 7340032 0x109385: vector (stl_vector.h:511)
+         n3: 7340032 0x109385: printer(char const*, unsigned int) (main.cpp:35)
+          n1: 4194304 0x1091E1: A (main.cpp:66)
+           n0: 4194304 0x1091E1: main (main.cpp:94)
+          n3: 3145728 0x1093E4: printer(char const*, unsigned int) (main.cpp:41)
+           n1: 2097152 0x1091E1: A (main.cpp:66)
+            n0: 2097152 0x1091E1: main (main.cpp:94)
+           n2: 1048576 0x1093E4: printer(char const*, unsigned int) (main.cpp:41)
+            n1: 1048576 0x1091E1: A (main.cpp:66)
+             n0: 1048576 0x1091E1: main (main.cpp:94)
+            n0: 0 in 3 places, all below massif's threshold (1.00%)
+           n0: 0 in 2 places, all below massif's threshold (1.00%)
+          n0: 0 in 2 places, all below massif's threshold (1.00%)
+ n0: 73728 in 2 places, all below massif's threshold (1.00%)
+#-----------
+snapshot=55
+#-----------
+time=7448434033
+mem_heap_B=7413760
+mem_heap_extra_B=4072
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=56
+#-----------
+time=7580558669
+mem_heap_B=7413760
+mem_heap_extra_B=4072
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=57
+#-----------
+time=7712683305
+mem_heap_B=7413760
+mem_heap_extra_B=4072
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=58
+#-----------
+time=7844807941
+mem_heap_B=7413760
+mem_heap_extra_B=4072
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=59
+#-----------
+time=7976932577
+mem_heap_B=7413760
+mem_heap_extra_B=4072
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=60
+#-----------
+time=8109057213
+mem_heap_B=7413760
+mem_heap_extra_B=4072
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=61
+#-----------
+time=8241181849
+mem_heap_B=7413760
+mem_heap_extra_B=4072
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=62
+#-----------
+time=8373306485
+mem_heap_B=7413760
+mem_heap_extra_B=4072
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=63
+#-----------
+time=8505431121
+mem_heap_B=7413760
+mem_heap_extra_B=4072
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=64
+#-----------
+time=8637555757
+mem_heap_B=7413760
+mem_heap_extra_B=4072
+mem_stacks_B=0
+heap_tree=detailed
+n2: 7413760 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 7340032 0x109385: allocate (new_allocator.h:127)
+  n1: 7340032 0x109385: allocate (allocator.h:185)
+   n1: 7340032 0x109385: allocate (alloc_traits.h:464)
+    n1: 7340032 0x109385: _M_allocate (stl_vector.h:346)
+     n1: 7340032 0x109385: _M_allocate (stl_vector.h:343)
+      n1: 7340032 0x109385: _M_create_storage (stl_vector.h:361)
+       n1: 7340032 0x109385: _Vector_base (stl_vector.h:305)
+        n1: 7340032 0x109385: vector (stl_vector.h:511)
+         n3: 7340032 0x109385: printer(char const*, unsigned int) (main.cpp:35)
+          n1: 4194304 0x1091E1: A (main.cpp:66)
+           n0: 4194304 0x1091E1: main (main.cpp:94)
+          n3: 3145728 0x1093E4: printer(char const*, unsigned int) (main.cpp:41)
+           n1: 2097152 0x1091E1: A (main.cpp:66)
+            n0: 2097152 0x1091E1: main (main.cpp:94)
+           n2: 1048576 0x1093E4: printer(char const*, unsigned int) (main.cpp:41)
+            n1: 1048576 0x1091E1: A (main.cpp:66)
+             n0: 1048576 0x1091E1: main (main.cpp:94)
+            n0: 0 in 3 places, all below massif's threshold (1.00%)
+           n0: 0 in 2 places, all below massif's threshold (1.00%)
+          n0: 0 in 2 places, all below massif's threshold (1.00%)
+ n0: 73728 in 2 places, all below massif's threshold (1.00%)
+#-----------
+snapshot=65
+#-----------
+time=8769680393
+mem_heap_B=7413760
+mem_heap_extra_B=4072
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=66
+#-----------
+time=8901805029
+mem_heap_B=7413760
+mem_heap_extra_B=4072
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=67
+#-----------
+time=9033929665
+mem_heap_B=7413760
+mem_heap_extra_B=4072
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=68
+#-----------
+time=9166054301
+mem_heap_B=7413760
+mem_heap_extra_B=4072
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=69
+#-----------
+time=9298178937
+mem_heap_B=7413760
+mem_heap_extra_B=4072
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=70
+#-----------
+time=9430303573
+mem_heap_B=7413760
+mem_heap_extra_B=4072
+mem_stacks_B=0
+heap_tree=empty
