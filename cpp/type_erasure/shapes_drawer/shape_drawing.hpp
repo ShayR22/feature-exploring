@@ -1,7 +1,7 @@
 #pragma once
 
-#include "circle.hpp"
-#include "rect.hpp"
+#include "shapes/circle.hpp"
+#include "shapes/rect.hpp"
 #include <cstdio>
 
 void draw_circle(const Circle& circle) {

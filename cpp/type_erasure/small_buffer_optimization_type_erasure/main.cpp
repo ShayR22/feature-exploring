@@ -1,8 +1,7 @@
-#include "circle.hpp"
-#include "rect.hpp"
-#include "shape_drawing.hpp"
 #include "shape_te.hpp"
-
+#include "shapes/circle.hpp"
+#include "shapes/rect.hpp"
+#include "shapes_drawer/shape_drawing.hpp"
 #include <vector>
 #include <iostream>
 

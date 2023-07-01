@@ -1,10 +1,9 @@
-#include "circle.hpp"
-#include "rect.hpp"
-#include "shape_drawing.hpp"
 #include "shape_te.hpp"
-
-#include <vector>
+#include "shapes/circle.hpp"
+#include "shapes/rect.hpp"
+#include "shapes_drawer/shape_drawing.hpp"
 #include <iostream>
+#include <vector>
 
 int main() {
     std::vector<Shape> shapes;
