@@ -4,6 +4,8 @@
 #include <span>
 #include <cstdlib>
 
+namespace simple_up_shape_te {
+
 class Shape {
 public:
     template<typename ShapeT, typename DrawStrategy>
@@ -40,3 +42,5 @@ private:
 
     std::unique_ptr<ShapeConcept> _pimpl{nullptr};
 };
+
+}// end namespace simple_up_shape_te {

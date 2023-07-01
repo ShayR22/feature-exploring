@@ -6,6 +6,8 @@
 #include <array>
 #include <cstddef>
 
+namespace sbo_shape_te {
+
 template<typename T>
 std::span<const uint8_t> default_stack_serializtion(const T& element) {
     const uint8_t* element_buffer = reinterpret_cast<const uint8_t*>(std::addressof(element));
@@ -121,3 +123,5 @@ private:
     // create an aligned buffer with fixed size
     alignas(alignment) std::array<std::byte, buffersize> _buffer;
 };
+
+} // end namespace sbo_shape_te

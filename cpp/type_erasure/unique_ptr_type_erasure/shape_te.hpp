@@ -4,6 +4,8 @@
 #include <span>
 #include <cstdlib>
 
+namespace up_shape_te {
+
 template<typename T>
 std::span<const uint8_t> default_stack_serializtion(const T& element) {
     const uint8_t* element_buffer = reinterpret_cast<const uint8_t*>(std::addressof(element));
@@ -70,3 +72,5 @@ private:
 
     std::unique_ptr<ShapeConcept> _pimpl{nullptr};
 };
+
+} // end namespace simple_up_shape_te

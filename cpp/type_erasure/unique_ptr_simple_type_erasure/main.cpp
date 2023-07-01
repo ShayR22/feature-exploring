@@ -6,6 +6,7 @@
 #include <vector>
 
 int main() {
+    using namespace simple_up_shape_te;
     std::vector<Shape> shapes;
 
     shapes.push_back({Circle{1}, draw_circle});
@@ -16,4 +17,5 @@ int main() {
     for (const auto& shape: shapes) {
         shape.draw();
     }
+    return 0;
 }

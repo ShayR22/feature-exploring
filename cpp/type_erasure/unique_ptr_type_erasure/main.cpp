@@ -15,6 +15,8 @@ void span_buffer_printer(std::span<const uint8_t> buffer) {
 }
 
 int main() {
+
+    using namespace up_shape_te;
     std::vector<Shape> shapes;
 
     shapes.push_back({Circle{1}, draw_circle});
@@ -27,4 +29,6 @@ int main() {
         std::span<const uint8_t> serialized_data = shape.serialize();
         span_buffer_printer(serialized_data);
     }
+
+    return 0;
 }
