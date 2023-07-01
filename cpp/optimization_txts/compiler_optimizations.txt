@@ -1,0 +1,28 @@
+1. unity_build: add all cpp files into one cpp file using #include
+example:
+a.cpp
+a.hpp
+b.cpp
+b.hpp
+....
+
+adding unity_build_file.cpp which looks like:
+#include "a.cpp"
+#include "b.cpp"
+...
+
+this solves the problem precompiled header by only linking
+once as all compiliation is done in a single file. and allows
+for better optimizations as some functions might get inlined
+better.
+
+
+2. remove exception and rtti
+make binary much smaller.
+
+3. set target archtiectue -mcpu=native/arch:ARMv7VE/....
+ 
+4. extern template to remove multiple inisitiation (unity build might remove this)
+
+
+5. precompiled header

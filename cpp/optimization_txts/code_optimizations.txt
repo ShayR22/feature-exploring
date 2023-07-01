@@ -1,0 +1,14 @@
+1. use constexpr to move logic into build time
+
+2. const everything u can, const variables const memeber function 
+
+3. no except, good for doc to user and optimization for compiler, RISKY
+if it throws u are fucked, compiler a lot of time can deduct this itself
+
+4. in cpp file use static for free private function and globals for better linkages and optimizations
+
+5. attribute [[no_return]] for functions that while true / always throw / exit
+
+
+
+
