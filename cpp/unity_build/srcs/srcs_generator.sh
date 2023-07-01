@@ -1,6 +1,8 @@
 #!/bin/bash
 
-for i in {0..100}; do
+
+NUM_CLASSES=100
+for i in $(seq 0 $NUM_CLASSES); do
 	# generate header
 	CLASS_NAME="CustomClass$i"
 	# generate header file
@@ -50,7 +52,7 @@ fi
 
 touch "${UNITY_BUILD_FILE}"
 
-for i in {0..100}; do
+for i in $(seq 0 $NUM_CLASSES); do
 	printf \
 "#include \"srcs/custom_class_%d.cpp\"\n" $i >> "${UNITY_BUILD_FILE}"
 done
