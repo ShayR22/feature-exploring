@@ -1,4 +1,4 @@
-#include "mul.hpp"
+#include "kita_bet/mul.hpp"
 #include "kita_alef/add.hpp"
 #include <cstdio>
 
