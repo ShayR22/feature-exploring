@@ -14,6 +14,7 @@ add_library(kita_bet STATIC ${SRCS})
 target_include_directories(kita_bet PUBLIC include)
 target_link_libraries(kita_bet PUBLIC kita_alef)
 
-install(TARGETS kita_bet DESTINATION lib)
-install(FILES ${HEADERS} DESTINATION include/kita_bet)
-
+set_target_properties(${PROJECT_NAME}
+    PROPERTIES
+    ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib/${PROJECT_NAME}"
+)

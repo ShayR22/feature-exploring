@@ -12,9 +12,10 @@ SET(SRCS
     srcs/sub.cpp
 )
 
-add_library(kita_alef STATIC ${SRCS})
-target_include_directories(kita_alef PUBLIC include)
+add_library(${PROJECT_NAME} STATIC ${SRCS})
+target_include_directories(${PROJECT_NAME} PUBLIC include)
 
-install(TARGETS kita_alef DESTINATION lib)
-install(FILES ${HEADERS} DESTINATION include/kita_alef)
-
+set_target_properties(${PROJECT_NAME}
+    PROPERTIES
+    ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib/${PROJECT_NAME}"
+)
