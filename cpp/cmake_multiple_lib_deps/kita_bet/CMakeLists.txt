@@ -14,7 +14,11 @@ add_library(kita_bet STATIC ${SRCS})
 target_include_directories(kita_bet PUBLIC include)
 target_link_libraries(kita_bet PUBLIC kita_alef)
 
-set_target_properties(${PROJECT_NAME}
-    PROPERTIES
-    ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib/${PROJECT_NAME}"
+install(TARGETS ${PROJECT_NAME}
+    ARCHIVE DESTINATION ${INSTALL_DIR}/lib/${PROJECT_NAME}
+)
+
+install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/include/${PROJECT_NAME}/
+    DESTINATION ${INSTALL_DIR}/lib/${PROJECT_NAME}/include
+    FILES_MATCHING PATTERN "*.h*"
 )
