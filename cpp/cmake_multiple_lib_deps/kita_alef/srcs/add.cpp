@@ -1,7 +1,7 @@
 #include "kita_alef/add.hpp"
 #include <cstdio>
 
-int add(int x, int y) {
-    printf("x=[%d] y=[%d]\n", x, y);
-    return x + y;
+int add(int number1, int number2) {
+    printf("number1=[%d] number2=[%d]\n", number1, number2);
+    return number1 + number2;
 }

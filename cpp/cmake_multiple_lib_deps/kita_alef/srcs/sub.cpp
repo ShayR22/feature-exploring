@@ -1,5 +1,5 @@
 #include "kita_alef/sub.hpp"
 
-int sub(int x, int y) {
-    return x - y;
+int sub(int number1, int number2) {
+    return number1 - number2;
 }

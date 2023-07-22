@@ -1,3 +1,3 @@
 #pragma once
 
-int sub(int x, int y);
+int sub(int number1, int number2);

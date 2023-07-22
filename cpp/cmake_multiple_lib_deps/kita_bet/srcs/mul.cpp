@@ -2,11 +2,11 @@
 #include "kita_alef/add.hpp"
 #include <cstdio>
 
-int mul(int x, int y) {
-    printf("x=[%d] y=[%d]\n", x, y);
+int mul(int number1, int number2) {
+    printf("number1=[%d] number2=[%d]\n", number1, number2);
     int res = 0;
-    for (int i = 0; i < y; i++) {
-        res = add(res, x);
+    for (int i = 0; i < number2; i++) {
+        res = add(number1, res);
     }
     return res;
 }
