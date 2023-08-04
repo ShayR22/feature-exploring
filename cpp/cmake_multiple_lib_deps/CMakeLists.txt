@@ -23,7 +23,6 @@ set(CMAKE_CXX_CLANG_TIDY
 # Set the install destination to the build directory
 set(INSTALL_DIR "${CMAKE_BINARY_DIR}/install")
 
-
 add_subdirectory("kita_alef")
 add_subdirectory("kita_bet")
 add_subdirectory("my_main")
