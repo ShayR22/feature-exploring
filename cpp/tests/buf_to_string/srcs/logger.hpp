@@ -37,12 +37,12 @@ inline std::ostream &operator<<(std::ostream &os, unsigned char c) {
 
 
 // sizeof("4294967295") - 1
-static constexpr uint8_t calc_uint32_length_as_str(uint32_t num) {
+static const uint8_t calc_uint32_length_as_str(uint32_t num) {
     return static_cast<uint8_t>(std::log10(num)) + 1;
 }
 
-static constexpr uint8_t LEN_MAX_UINT32_AS_STR{calc_uint32_length_as_str(UINT32_MAX)};
-static constexpr std::string_view SIZE_FMT{":\nsize=["};
+static const uint8_t LEN_MAX_UINT32_AS_STR{calc_uint32_length_as_str(UINT32_MAX)};
+static const std::string_view SIZE_FMT{":\nsize=["};
 
 template <typename T>
 size_t calc_buf_to_str_size(const char* buffer_name, size_t len, bool is_hex=true) {

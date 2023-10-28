@@ -147,7 +147,9 @@ static uint32_t measure_avg_execution_time_milli(const std::string& func_name,
     return measure_avg_execution_time_micro(func, num_calls, func_name) / THOUSAND;
 }
 
+// NOLINTBEGIN(*)
 #define RUN_TEST(func)                                          \
     do {                                                        \
         measure_avg_execution_time_nano(#func, func);           \
     } while(0)
+// NOLINTEND(*)
