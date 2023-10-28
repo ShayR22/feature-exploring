@@ -1,12 +1,10 @@
-cmake_minimum_required(VERSION 3.10)
-project(tester)
+project(set_vs_array_tests)
 
+add_executable(${PROJECT_NAME}
+    srcs/main.cpp
+)
 
-set(CMAKE_CXX_STANDARD 20)
-set(CMAKE_CXX_STANDARD_REQUIRED True)
-set(CMAKE_CXX_FLAGS "-O2")
+target_link_libraries(${PROJECT_NAME} PRIVATE func_measuring)
 
-set(SRC_FILES main.cpp)
-
-
-add_executable(benchmarking ${SRC_FILES})
+include(${CMAKE_INSTALL_BIN_HELPER})
+include(${CMAKE_TOOLS_PATH})

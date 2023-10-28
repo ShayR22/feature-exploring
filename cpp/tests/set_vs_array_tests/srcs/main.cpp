@@ -1,15 +1,12 @@
-#include <thread>
-#include <stdio.h>
-#include <map>
-#include <unordered_map>
-#include <array>
-#include "tester.hpp"
-#include <stdexcept>
+#include "func_measuring/tester.hpp"
 #include <algorithm>
-
-static constexpr uint32_t KB_SIZE_BYTES = 1024;
-static constexpr uint32_t MB_SIZE_BYTES = KB_SIZE_BYTES * KB_SIZE_BYTES;
-
+#include <array>
+#include <cstdio>
+#include <map>
+#include <span>
+#include <stdexcept>
+#include <thread>
+#include <unordered_map>
 
 static uint32_t size_mb = 1;
 static uint32_t num_calls = 0;
@@ -19,7 +16,7 @@ template<typename Key, typename Value, std::size_t Size>
 struct Map {
     std::array<std::pair<Key, Value>, Size> data;
 
-    constexpr Value at(const Key& key) const {
+    [[nodiscard]] constexpr Value at(const Key& key) const {
         const auto itr = std::find_if(begin(data), end(data), [&key](const auto& v) {return v.first == key; });
 
         if (itr != end(data)) {
@@ -31,6 +28,7 @@ struct Map {
 };
 
 
+// NOLINTBEGIN(*)
 static constexpr std::array<std::pair<int, int>, 10> my_values{
    {{3211, 123},
     {12834, 9321},
@@ -43,10 +41,11 @@ static constexpr std::array<std::pair<int, int>, 10> my_values{
     {243, 120311},
     {1194, 812347}}
 };
+// NOLINTEND(*)
 
 static constexpr auto array_map = Map<int, int, my_values.size()>{{my_values}};
 
-
+// NOLINTBEGIN(*)
 static constexpr std::array<int, 10> keys = {
     3211,
     12834,
@@ -59,7 +58,9 @@ static constexpr std::array<int, 10> keys = {
     243,
     1194
 };
+// NOLINTEND(*)
 
+// NOLINTBEGIN(*)
 static std::map<int, int> my_values_map {
     {3211, 123},
     {12834, 9321},
@@ -72,6 +73,7 @@ static std::map<int, int> my_values_map {
     {243, 120311},
     {1194, 812347}
 };
+// NOLINTEND(*)
 
 int lookup_value(const int key) {
     static constexpr auto map = Map<int, int, my_values.size()>{{my_values}};
@@ -83,11 +85,11 @@ template<typename T>
 static void test_generic_map(T& my_map, const std::string& map_type_str) {
 
     static constexpr uint8_t MAP_ENTRY_SIZE = 12;
-    uint32_t num_elements = size_mb * MB_SIZE_BYTES / MAP_ENTRY_SIZE;
+    uint32_t num_elements = size_mb * MB / MAP_ENTRY_SIZE;
     printf("map type %s: num_elemnets = %u, size_mb = %u\n", map_type_str.c_str(), num_elements, size_mb);
 
-
     auto get_random_key = [&]() -> int{
+        // NOLINTNEXTLINE
         return keys[rand() % keys.size()];
     };
 
@@ -105,11 +107,7 @@ static void test_generic_map(T& my_map, const std::string& map_type_str) {
         return sum;
     };
 
-    if (num_calls == 0) {
-        measure_avg_execution_time(sum_random_elements);
-    } else {
-        measure_avg_execution_time(sum_random_elements, num_calls);
-    }
+    measure_avg_execution_time_nano(sum_random_elements, num_calls);
 }
 
 static void test_std_map() {
@@ -122,23 +120,17 @@ static void test_array_map() {
 
 
 int main(int argc, const char* argv[]) {
-
-    uint32_t hard_function_avg_exec_time_ms = -1;
-
-
+    auto args = std::span(argv, size_t(argc));
     if (argc > 1) {
-        num_calls = atoi(argv[1]);
+        num_calls = atoi(args[1]);
     }
 
     if (argc > 2) {
-        size_mb = atoi(argv[2]);
+        size_mb = atoi(args[2]);
     }
-
 
     test_array_map();
     test_std_map();
-
-
 
     constexpr auto value = array_map.at(243);
 

@@ -38,7 +38,7 @@ static std::string _to_string_with_precision(const std::floating_point auto a_va
     return out.str();
 }
 
-static void print_allocation_size(uint32_t allocation_size) {
+void print_allocation_size(uint32_t allocation_size) {
     float allocation_size_f = static_cast<float>(allocation_size);
     std::string allocation_size_suffix = "Bytes";
 
