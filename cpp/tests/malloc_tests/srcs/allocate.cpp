@@ -1,8 +1,10 @@
-#include "../../func_measuring/tester.hpp"
+#include "func_measuring/tester.hpp"
 
 #include <vector>
 #include <memory>
 #include <cstring>
+
+static constexpr uint32_t MAX_STACK_SIZE = 4 * KB;
 
 template<typename T>
 void memcpy_container(std::vector<T>& dst_container, const std::vector<T>& src_container) {
@@ -16,7 +18,8 @@ static inline void sum_container(const auto& container, const uint32_t size) {
         sum += container[i];
     }
 
-    if (sum > 0xFFFFFFFFFFFFFFFFULL) {
+    static constexpr auto MAX_SUM_FOR_PRINT = 0xFFFFFFFFFFFFFFFFULL;
+    if (sum > MAX_SUM_FOR_PRINT) {
         printf("sum=[%lu]\n", sum);
     }
 }
@@ -28,7 +31,8 @@ static void run_allocation_tests(uint32_t allocation_size) {
     auto allocate_vec_resize = [&]() {
         std::vector<uint32_t> vec;
         vec.resize(allocation_size);
-        sum_container(vec, 10);
+        static constexpr uint8_t CACHE_READ_SIZE = 10;
+        sum_container(vec, CACHE_READ_SIZE);
     };
 
     auto allocate_vec_ctor = [&]() {
@@ -36,19 +40,21 @@ static void run_allocation_tests(uint32_t allocation_size) {
     };
 
     auto allocate_buffer = [&]() {
+        // NOLINTNEXTLINE
         auto buffer = std::make_unique<uint32_t[]>(allocation_size);
     };
 
     bool err = false;
     auto allocate_stack = [&]() {
-        if (allocation_size > 4096) {
+        if (allocation_size > MAX_STACK_SIZE) {
             if (!err) {
                 printf("ERROR to big to allcoate on stack\n");
             }
             err = true;
             return;
         }
-        uint8_t buffer[allocation_size];
+        // NOLINTNEXTLINE
+        [[maybe_unused]] uint8_t buffer[MAX_STACK_SIZE];
     };
 
     std::vector<uint32_t> sum_vec(allocation_size);
@@ -73,33 +79,12 @@ static void run_allocation_tests(uint32_t allocation_size) {
     RUN_TEST(memcpy_containers);
 }
 
-static void print_going_to(uint32_t allocation_size) {
-    float allocation_size_f = allocation_size;
-    std::string allocation_size_suffix = "Bytes";
-
-    if (allocation_size_f >= 1<<30) {
-        allocation_size_f /= 1<<30;
-        allocation_size_suffix = "GB";
-    }
-
-    if (allocation_size_f >= 1<<20) {
-        allocation_size_f /= 1<<20;
-        allocation_size_suffix = "MB";
-    }
-
-    if (allocation_size_f >= 1<<10) {
-        allocation_size_f /= 1<<10;
-        allocation_size_suffix = "KB";
-    }
-
-    std::string allocation_size_str = _to_string_with_precision(allocation_size_f);
-    printf("\nGoing to test allocation with %s[%s]\n", allocation_size_str.c_str(), allocation_size_suffix.c_str());
-}
-
 int main() {
-    for(uint32_t i = 4; i <= 23; i++) {
+    static constexpr uint8_t TWO_POWER_MIN_ALLOC = 4;
+    static constexpr uint8_t TWO_POWER_MAX_ALLOC = 23;
+    for(uint32_t i = TWO_POWER_MIN_ALLOC; i <= TWO_POWER_MAX_ALLOC; i++) {
         uint32_t allocation_size = 1 << i;
-        print_going_to(allocation_size);
+        print_allocation_size(allocation_size);
         run_allocation_tests(allocation_size);
     }
 }

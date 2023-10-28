@@ -17,6 +17,11 @@
 #include <sstream>
 #include <array>
 
+
+static constexpr uint32_t KB = 1<<10;
+static constexpr uint32_t MB = 1<<20;
+static constexpr uint32_t GB = 1<<30;
+
 static constexpr int64_t THOUSAND = 1000;
 static constexpr int64_t MILLION = THOUSAND * THOUSAND;
 static constexpr int64_t BILLION = MILLION * THOUSAND;
@@ -26,12 +31,36 @@ static constexpr std::array<std::string_view, 4> MEASUREMENTS_UNITS_STR{
     "seconds", "milliseconds", "microseonds", "nanoseconds"
 };
 
-std::string _to_string_with_precision(const std::floating_point auto a_value, const int n = 3) {
+static std::string _to_string_with_precision(const std::floating_point auto a_value, const int n = 3) {
     std::ostringstream out;
     out.precision(n);
     out << std::fixed << a_value;
     return out.str();
 }
+
+static void print_allocation_size(uint32_t allocation_size) {
+    float allocation_size_f = static_cast<float>(allocation_size);
+    std::string allocation_size_suffix = "Bytes";
+
+    if (allocation_size_f >= static_cast<float>(GB)) {
+        allocation_size_f /= static_cast<float>(GB);
+        allocation_size_suffix = "GB";
+    }
+
+    if (allocation_size_f >= static_cast<float>(MB)) {
+        allocation_size_f /= static_cast<float>(MB);
+        allocation_size_suffix = "MB";
+    }
+
+    if (allocation_size_f >= static_cast<float>(KB)) {
+        allocation_size_f /= static_cast<float>(KB);
+        allocation_size_suffix = "KB";
+    }
+
+    std::string allocation_size_str = _to_string_with_precision(allocation_size_f);
+    printf("\nGoing to test allocation with %s[%s]\n", allocation_size_str.c_str(), allocation_size_suffix.c_str());
+}
+
 
 static uint32_t _get_measurement_index(int64_t time_measurement) {
     for (size_t i = 0; i < MEASUREMENTS_UNITS.size(); i++) {
