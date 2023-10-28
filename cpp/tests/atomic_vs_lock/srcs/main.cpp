@@ -1,12 +1,14 @@
-
-
-
 #include <cstdio>
 #include <cstdint>
 #include <mutex>
 #include <atomic>
 #include <unistd.h>
 #include <thread>
+#include <span>
+
+static constexpr uint8_t SHORT_SLEEP_US = 100;
+static constexpr uint32_t LONG_SLEEP_US = 10 * 1000;
+static constexpr uint8_t NUM_TOGGLES = 5;
 
 void atomic_test() {
     std::atomic<bool> enabled = true;
@@ -21,10 +23,11 @@ void atomic_test() {
     };
 
     auto counter_stopper_lambda =  [&]() {
-        for (uint32_t i = 0; i < 5; i++) {
-            usleep(10 * 1000);
+
+        for (uint32_t i = 0; i < NUM_TOGGLES; i++) {
+            usleep(LONG_SLEEP_US);
             enabled = false;
-            usleep(100);
+            usleep(SHORT_SLEEP_US);
             enabled = true;
         }
         enabled = false;
@@ -52,10 +55,10 @@ void mutex_test() {
     };
 
     auto counter_stopper_lambda =  [&]() {
-        for (uint32_t i = 0; i < 5; i++) {
-            usleep(10 * 1000);
+        for (uint32_t i = 0; i < NUM_TOGGLES; i++) {
+            usleep(LONG_SLEEP_US);
             lock.lock();
-            usleep(100);
+            usleep(SHORT_SLEEP_US);
             lock.unlock();
         }
         lock.lock();
@@ -71,19 +74,21 @@ void mutex_test() {
 }
 
 int main(int argc, const char* argv[]) {
+    auto args = std::span(argv, size_t(argc));
+    const char* program_name = args[0];
     if (argc != 2) {
-        printf("%s: a for atomic test, m for mutex test\n", argv[0]);
+        printf("%s: a for atomic test, m for mutex test\n", program_name);
         return -1;
     }
 
-    char option = argv[1][0];
+    char option = args[1][0];
 
     if (option == 'a') {
         atomic_test();
     } else if (option == 'm') {
         mutex_test();
     } else {
-        printf("%s: a for atomic test, m for mutex test\n", argv[0]);
+        printf("%s: a for atomic test, m for mutex test\n", program_name);
         return -1;
     }
 
