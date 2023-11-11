@@ -1,10 +1,9 @@
 cmake_minimum_required(VERSION 3.10)
-project(spdlog_main)
+project(spdlog_test)
 
 find_library(SPDLOG
             NAMES libspdlog.a
-            PATHS "${CMAKE_SOURCE_DIR}/libs"
-
+            PATHS "${CMAKE_CURRENT_SOURCE_DIR}/libs"
 )
 
 message(NOTICE "path: ${CMAKE_SOURCE_DIR}/libs/")
@@ -14,7 +13,7 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 set(CMAKE_CXX_FLAGS "-O2")
 
-set(SRC_FILES main.cpp)
+set(SRC_FILES srcs/main.cpp)
 
 add_executable(${PROJECT_NAME} ${SRC_FILES})
 
