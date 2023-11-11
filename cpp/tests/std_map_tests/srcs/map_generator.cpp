@@ -30,7 +30,7 @@ static void print_map_array(const std::map<uint32_t, uint32_t>& numbers_map) {
         printf("\t{%u, %u},\n", key, val);
     }
     printf("};\n");
-    
+
     printf("static void init_map(std::map<uint32_t, uint32_t>& numbers_map) {\n");
     printf("\tfor (const auto& [key, val]: number_map_entries) {\n");
     printf("\t\t numbers_map[key] = val;\n");
@@ -40,7 +40,7 @@ static void print_map_array(const std::map<uint32_t, uint32_t>& numbers_map) {
 
 static std::map<uint32_t, uint32_t> gen_map(long num_elements) {
     std::map<uint32_t, uint32_t> number_map{};
-    
+
     while (number_map.size() < (size_t)num_elements) {
         uint32_t random_key = rand();
         if (number_map.find(random_key) != number_map.end()) {
@@ -60,7 +60,7 @@ int main(int argc, const char* argv[]) {
         return -1;
     }
 
-    srand(time(NULL));  
+    srand(time(NULL));
     long choice = atoi(argv[1]);
     long num_elements = atoi(argv[2]);
 

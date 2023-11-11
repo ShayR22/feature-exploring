@@ -1,8 +1,9 @@
 #include <thread>
-#include <stdio.h>
+#include <cstdio>
 #include <map>
+#include <span>
 #include <unordered_map>
-#include "tester.hpp"
+#include "func_measuring/tester.hpp"
 
 static constexpr uint32_t KB_SIZE_BYTES = 1024;
 static constexpr uint32_t MB_SIZE_BYTES = KB_SIZE_BYTES * KB_SIZE_BYTES;
@@ -13,13 +14,13 @@ static uint32_t num_calls = 0;
 
 template<typename T>
 static void test_generic_map(T& my_map, const std::string& map_type_str) {
-
     static constexpr uint8_t MAP_ENTRY_SIZE = 12;
     uint32_t num_elements = size_mb * MB_SIZE_BYTES / MAP_ENTRY_SIZE;
     printf("map type %s: num_elemnets = %u, size_mb = %u\n", map_type_str.c_str(), num_elements, size_mb);
 
     for (uint64_t i = 0; i < num_elements; i++) {
-        my_map[i] = (i * i) % 1 << 16;
+        static constexpr auto RANDOM_MODULO = 16;
+        my_map[i] = (i * i) % 1 << RANDOM_MODULO;
     }
 
     auto random_map_access = [&]() -> uint32_t {
@@ -35,9 +36,9 @@ static void test_generic_map(T& my_map, const std::string& map_type_str) {
     };
 
     if (num_calls == 0) {
-        measure_avg_execution_time(sum_random_elements);
+        measure_avg_execution_time_nano(sum_random_elements);
     } else {
-        measure_avg_execution_time(sum_random_elements, num_calls);
+        measure_avg_execution_time_nano(sum_random_elements, num_calls);
     }
 }
 
@@ -52,19 +53,13 @@ static void test_std_unordered_map() {
 }
 
 int main(int argc, const char* argv[]) {
-    auto hard_function = []() {
-        std::this_thread::sleep_for(std::chrono::milliseconds(2));
-    };
-
-    uint32_t hard_function_avg_exec_time_ms = -1;
-
-
+    auto args = std::span(argv, size_t(argc));
     if (argc > 1) {
-        num_calls = atoi(argv[1]);
+        num_calls = atoi(args[1]);
     }
 
     if (argc > 2) {
-        size_mb = atoi(argv[2]);
+        size_mb = atoi(args[2]);
     }
 
     test_std_unordered_map();
