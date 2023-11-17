@@ -1,5 +1,6 @@
 #include "btree.hpp"
-#include <stdio.h>
+#include <array>
+#include <cstdio>
 
 void my_dfs(const std::unique_ptr<Node<int>>& node) {
     if (node == nullptr) {
@@ -12,14 +13,15 @@ void my_dfs(const std::unique_ptr<Node<int>>& node) {
 
 int main() {
     BTree<int> btree{};
-    btree.add(5);
-    btree.add(3);
-    btree.add(1);
-    btree.add(4);
-    btree.add(7);
+    static constexpr auto NUM_RANDOM_NUMBERS = 5;
+    static constexpr std::array<int, NUM_RANDOM_NUMBERS> RANDOM_VALUES = {
+        5, 3, 1, 4, 7
+    };
 
-    // my_dfs(btree.get_head());
-    // printf("\n\n\n");
+    for (const auto& val: RANDOM_VALUES) {
+        btree.add(val);
+    }
+
     auto print_node = [](const Node<int>* node) {
         printf("%d\n", node->data());
     };
