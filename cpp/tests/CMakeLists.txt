@@ -10,3 +10,5 @@ add_subdirectory("spdlog_test")
 add_subdirectory("standard_for_each")
 add_subdirectory("std_map_tests")
 add_subdirectory("type_erasure")
+add_subdirectory("list_vs_vector_insert_erase")
+
