@@ -15,9 +15,9 @@ Allocation::~Allocation() {
     _arena.deallocate(_size);
 }
 
-ArenaAllocator::ArenaAllocator(uint32_t size) {
-    _buffer = std::make_unique<uint8_t[]>(size);
-    _size = size;
+ArenaAllocator::ArenaAllocator(uint32_t size) : _size{size} {
+    _buffer = std::make_unique<uint8_t[]>(_size);
+
 }
 
 Allocation ArenaAllocator::allocate(uint32_t size) {
@@ -32,7 +32,7 @@ Allocation ArenaAllocator::allocate(uint32_t size) {
     _position += size;
     printf("PostAllocation pos=[%u] size_left=[%u]\n", _position, _size - _position);
     ArenaAllocator& arena = *(this);
-    return Allocation(arena, buffer, size);
+    return {arena, buffer, size};
 }
 
 void ArenaAllocator::deallocate(uint32_t size) {

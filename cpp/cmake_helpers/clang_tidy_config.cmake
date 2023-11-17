@@ -15,7 +15,8 @@ set(CLANG_TIDY_CHECKS_MODERNIZE
 set(CLANG_TIDY_CHECKS_CPP_CORE_GUIDE
     "cppcoreguidelines*,-cppcoreguidelines-pro-bounds-array-to-pointer-decay*, \
     -cppcoreguidelines-pro-type-union-access*, -cppcoreguidelines-avoid-non-const-global-variables*, \
-    -cppcoreguidelines-pro-type-reinterpret-cast*,-cppcoreguidelines-pro-type-vararg*"
+    -cppcoreguidelines-pro-type-reinterpret-cast*,-cppcoreguidelines-pro-type-vararg*, \
+    -cppcoreguidelines-avoid-c-arrays"
 )
 
 
