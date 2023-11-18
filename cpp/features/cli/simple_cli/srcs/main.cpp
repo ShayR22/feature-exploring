@@ -21,13 +21,15 @@ public:
     }
 
     int write_reg(const uint32_t address, const uint32_t value) {
-        printf("%s address=0x%08x, value=0x%08x\n", __func__, address, value);
+        printf("%s bus_number=%u address=0x%08x, value=0x%08x\n", __func__, _bus_number, address, value);
         return 0;
     }
 
     int read_reg(const uint32_t  address, uint32_t& value) {
-        value = rand_in_range(0, 255);
-        printf("%s address=0x%08x, value=0x%08x\n", __func__, address, value);
+        static constexpr auto START_RANGE = 0;
+        static constexpr auto END_RANGE = 255;
+        value = rand_in_range(START_RANGE, END_RANGE);
+        printf("%s bus_number=%u address=0x%08x, value=0x%08x\n", __func__, _bus_number, address, value);
         return 0;
     }
 private:
@@ -65,7 +67,7 @@ int main(int argc, char** argv) {
             std::cerr << "Error reading from register\n";
             exit(1);
         }
-        std::cout << "Register value: " << read_value << std::endl;
+        std::cout << "Register value: " << read_value << '\n';
     });
 
     // run the CLI
