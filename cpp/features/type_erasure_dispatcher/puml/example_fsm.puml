@@ -1,0 +1,15 @@
+@startuml
+
+state A
+state B
+state C
+
+[*] -r-> A
+A -r-> B: x
+B -u-> A: x
+B -r-> C: y
+C -r-> B: z==1
+C -d-> A: z!=1
+
+
+@enduml

@@ -8,4 +8,5 @@ add_subdirectory("btree_iterators")
 add_subdirectory("cli")
 add_subdirectory("func_measuring")
 add_subdirectory("macro_log_line")
+add_subdirectory("type_erasure_dispatcher")
 
