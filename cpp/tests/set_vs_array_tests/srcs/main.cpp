@@ -7,6 +7,7 @@
 #include <stdexcept>
 #include <thread>
 #include <unordered_map>
+#include "gg.h"
 
 static uint32_t size_mb = 1;
 static uint32_t num_calls = 0;
@@ -95,7 +96,7 @@ static void test_generic_map(T& my_map, const std::string& map_type_str) {
 
     std::vector<int> random_keys{};
     random_keys.resize(num_elements);
-    for (int i = 0 ; i < num_elements; i++) {
+    for (uint32_t i = 0 ; i < num_elements; i++) {
         random_keys.push_back(get_random_key());
     }
 
