@@ -12,9 +12,9 @@ IS_CLEAN=0
 IS_BUILD_VERBOSE=0
 IS_DIR_CLEAN=0
 CMAKE_BUILD_TYPE="Release"
-IS_CLANG_BUILD_ANALYZER="OFF"
-IS_IWYU="ON"
-IS_CLANG_TIDY="ON"
+IS_CLANG_BUILD_ANALYZER=OFF
+IS_IWYU=ON
+IS_CLANG_TIDY=ON
 # Holds all target to build
 TARGET=()
 
@@ -66,20 +66,20 @@ while [[ $# -gt 0 ]]; do
         -d | --directory-clean)
             IS_DIR_CLEAN=1
             ;;
-        -v | --vervose-build)
+        -v | --verbose-build)
             IS_BUILD_VERBOSE=1
             ;;
         --build-debug)
             CMAKE_BUILD_TYPE="Debug"
             ;;
         --clang-build-analyzer)
-            IS_CLANG_BUILD_ANALYZER="ON"
+            IS_CLANG_BUILD_ANALYZER=ON
             ;;
         --no-iwyu)
-            IS_IWYU="OFF"
+            IS_IWYU=OFF
             ;;
         --no-clang-tidy)
-            IS_CLANG_TIDY="OFF"
+            IS_CLANG_TIDY=OFF
             ;;
         -t | --target)
             shift
@@ -115,28 +115,31 @@ while [[ $# -gt 0 ]]; do
 done
 
 # create build dir if doesn't exist
-if [ ! -d $BUILD_PATH ]; then
+if [[ ! -d $BUILD_PATH ]]; then
     mkdir $BUILD_PATH
 fi
 
-if [ $IS_DIR_CLEAN -ne 0 ]; then
+if [[ $IS_DIR_CLEAN -ne 0 ]]; then
     sudo rm -rf $BUILD_PATH
     mkdir $BUILD_PATH
 fi
 
 pushd $BUILD_PATH
 
-if [ ! -d $BUILD_INSTALL_BIN_PATH ]; then
+if [[ ! -d $BUILD_INSTALL_BIN_PATH ]]; then
     mkdir -p $BUILD_INSTALL_BIN_PATH
 fi
 
-if [ ! -d $BUILD_INSTALL_LIB_PATH ]; then
+if [[ ! -d $BUILD_INSTALL_LIB_PATH ]]; then
     mkdir -p $BUILD_INSTALL_LIB_PATH
 fi
 
 
 c_compiler_used=$(which clang)
 cxx_compiler_used=$(which clang++)
+
+# c_compiler_used=$(which gcc)
+# cxx_compiler_used=$(which g++)
 
 echo "c_compiler_used=$c_compiler_used cxx_compiler_used=$cxx_compiler_used"
 
@@ -153,10 +156,9 @@ cmake_cmd="$cmake_cmd -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}"
 # add install path
 cmake_cmd="$cmake_cmd -DBUILD_INSTALL_PATH=${BUILD_INSTALL_PATH}"
 
-if [ $IS_BUILD_VERBOSE -ne 0 ]; then
+if [[ $IS_BUILD_VERBOSE -ne 0 ]]; then
     cmake_cmd="$cmake_cmd -DCMAKE_MESSAGE_LOG_LEVEL=VERBOSE"
 fi
-
 
 # add tools used
 cmake_cmd="$cmake_cmd -DUSE_IWYU=${IS_IWYU} -DUSE_CLANG_TIDY=${IS_CLANG_TIDY}"
@@ -170,19 +172,19 @@ echo "Generating CMake cmake_cmd=$cmake_cmd"
 $cmake_cmd
 
 
-if [ ${IS_BUILD} -ne 0 ]; then
+if [[ ${IS_BUILD} -ne 0 ]]; then
     echo ${SEPARATION_LINE}
     build_cmd="cmake --build ."
 
-    if [ ${IS_BUILD_PARALLEL} -ne 0 ]; then
+    if [[ ${IS_BUILD_PARALLEL} -ne 0 ]]; then
         build_cmd="$build_cmd --parallel"
     fi
 
-    if [ ${IS_CLEAN} -ne 0 ]; then
+    if [[ ${IS_CLEAN} -ne 0 ]]; then
         build_cmd="$build_cmd --clean-first"
     fi
 
-    if [ ${#TARGET[@]} -ne 0 ]; then
+    if [[ ${#TARGET[@]} -ne 0 ]]; then
         cmake_cmd_targets="--target"
         for target in "${TARGET[@]}"; do
             cmake_cmd_targets="$cmake_cmd_targets $target"
@@ -190,7 +192,7 @@ if [ ${IS_BUILD} -ne 0 ]; then
         build_cmd="$build_cmd $cmake_cmd_targets"
     fi
 
-    if [ $IS_BUILD_VERBOSE -ne 0 ]; then
+    if [[ $IS_BUILD_VERBOSE -ne 0 ]]; then
         build_cmd="$build_cmd --verbose"
     fi
 
@@ -237,7 +239,7 @@ if [[ "${CMAKE_BUILD_TYPE}" == "Release" ]]; then
     done
 fi
 
-if [[ ${IS_CLANG_BUILD_ANALYZER} == "ON" ]]; then
+if [[ ${IS_CLANG_BUILD_ANALYZER} == ON ]]; then
     echo ${SEPARATION_LINE}
     echo "TODO complete this tool usage"
 fi
