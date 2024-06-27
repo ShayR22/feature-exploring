@@ -1,7 +1,8 @@
 #include <source_location>
 #include <cstdio>
+#include <cstdint>
 
-enum class LibResults {
+enum class LibResults : uint8_t {
     Success,
     InvalidArgument,
     InvalidType,
@@ -9,7 +10,7 @@ enum class LibResults {
 };
 
 
-
+// NOLINTBEGIN
 #define RET_ON_ERR(res, fmt, ...)                                                   \
     do {                                                                            \
         if (res != LibResults::Success) {                                           \
@@ -20,7 +21,7 @@ enum class LibResults {
             return res;                                                             \
         }                                                                           \
     } while(0)
-
+// NOLINTEND
 
 LibResults foo() {
     RET_ON_ERR(LibResults::Success, "gg");
