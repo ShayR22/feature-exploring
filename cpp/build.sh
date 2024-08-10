@@ -114,12 +114,15 @@ while [[ $# -gt 0 ]]; do
     shift
 done
 
+
 # create build dir if doesn't exist
 if [[ ! -d $BUILD_PATH ]]; then
+    echo "build_path: $BUILD_PATH not exist, creating it"
     mkdir $BUILD_PATH
 fi
 
 if [[ $IS_DIR_CLEAN -ne 0 ]]; then
+    echo "IS_DIR_CLEAN=$IS_DIR_CLEAN, deleting and recreating dir"
     sudo rm -rf $BUILD_PATH
     mkdir $BUILD_PATH
 fi
@@ -127,10 +130,12 @@ fi
 pushd $BUILD_PATH
 
 if [[ ! -d $BUILD_INSTALL_BIN_PATH ]]; then
+    echo "install_bin_path: $BUILD_INSTALL_BIN_PATH not exist, creating it"
     mkdir -p $BUILD_INSTALL_BIN_PATH
 fi
 
 if [[ ! -d $BUILD_INSTALL_LIB_PATH ]]; then
+    echo "install_lib_path: $BUILD_INSTALL_LIB_PATH not exist, creating it"
     mkdir -p $BUILD_INSTALL_LIB_PATH
 fi
 
