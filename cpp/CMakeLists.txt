@@ -55,4 +55,5 @@ set(INSTALL_DIR "${BUILD_INSTALL_PATH}")
 message(VERBOSE "INSTALL_DIR=${INSTALL_DIR}")
 
 add_subdirectory("features")
+add_subdirectory("test_support")
 add_subdirectory("tests")

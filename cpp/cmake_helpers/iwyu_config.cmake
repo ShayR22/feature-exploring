@@ -1,6 +1,13 @@
 find_program(IWYU_PATH NAMES include-what-you-use iwyu REQUIRED)
 if (IWYU_PATH)
-    message(STATUS "found IWYU_PATH=${IWYU_PATH}")
+    execute_process(COMMAND "${IWYU_PATH}" --version
+        OUTPUT_VARIABLE IWYU_VERSION_OUTPUT RESULT_VARIABLE IWYU_VERSION_RESULT
+        OUTPUT_STRIP_TRAILING_WHITESPACE)
+    if(NOT IWYU_VERSION_RESULT EQUAL 0)
+        message(FATAL_ERROR "include-what-you-use at ${IWYU_PATH} could not report its version")
+    endif()
+    string(REGEX MATCH "[^\n]+" IWYU_VERSION_LINE "${IWYU_VERSION_OUTPUT}")
+    message(STATUS "found IWYU_PATH=${IWYU_PATH} (${IWYU_VERSION_LINE})")
 else()
     message(FATAL_ERROR "Failed to find iwyu")
 endif()
