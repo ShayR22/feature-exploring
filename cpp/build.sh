@@ -123,7 +123,7 @@ fi
 
 if [[ $IS_DIR_CLEAN -ne 0 ]]; then
     echo "IS_DIR_CLEAN=$IS_DIR_CLEAN, deleting and recreating dir"
-    sudo rm -rf $BUILD_PATH
+    rm -rf "$BUILD_PATH"
     mkdir $BUILD_PATH
 fi
 
@@ -147,6 +147,8 @@ cxx_compiler_used=$(which clang++)
 # cxx_compiler_used=$(which g++)
 
 echo "c_compiler_used=$c_compiler_used cxx_compiler_used=$cxx_compiler_used"
+"$c_compiler_used" --version | head -n 1
+"$cxx_compiler_used" --version | head -n 1
 
 export CC="${c_compiler_used}"
 export CXX="${cxx_compiler_used}"
@@ -202,46 +204,41 @@ if [[ ${IS_BUILD} -ne 0 ]]; then
     fi
 
     echo "Building Project with cmd=$build_cmd"
-    sudo $build_cmd
+    $build_cmd
 fi
 
 if [[ ${IS_INSTALL} -ne 0 ]]; then
     echo ${SEPARATION_LINE}
     echo "Intalling Project"
-    sudo cmake --install .
+    cmake --install .
 fi
 
 if [[ ${IS_GRAPH_DEPENDENCY} -ne 0 ]]; then
     echo ${SEPARATION_LINE}
     echo "Generating dependecy graph"
-    sudo cmake --graphviz=./graph/graph .
+    cmake --graphviz=./graph/graph .
 fi
 
 # Symbol strip binaries and shared library
 if [[ "${CMAKE_BUILD_TYPE}" == "Release" ]]; then
     echo ${SEPARATION_LINE}
-    # when using llvm/clang strip is done by llvm-strip tool which comes as
-    # part of the llvm toolset. following lines would match the clang version
-    # to llvm-version meaning if we use clang 11.0.1 we would like to use llvm-strip-11
-    clang_version_output=$(clang --version)
-    llvm_major_version=$(echo "$clang_version_output" | grep -oP '(?<=version )\d+' | awk -F. '{print $1}')
-    llvm_strip_name="llvm-strip-${llvm_major_version}"
-    echo "llvm_strip_name=${llvm_strip_name}"
-
-    llvm_exec_path="$(which $llvm_strip_name)"
-    echo "llvm_exec_path=${llvm_exec_path}"
-
-    echo "Going to strip binaries"
-    for f in `find "${BUILD_INSTALL_PATH}/bin" -type f`; do
-        echo "stripping $f"
-        sudo $llvm_exec_path -s $f
-    done
-
-    echo "Going to strip shared libraries"
-    for f in `find "${BUILD_INSTALL_PATH}/lib" -type f -name "*.so"`; do
-        echo "stripping $f"
-        sudo $llvm_exec_path -s $f
-    done
+    # Match llvm-strip to the selected Clang major version. Resolve it only
+    # when installed binaries or shared libraries actually need stripping.
+    mapfile -t strip_files < <(find "${BUILD_INSTALL_PATH}/bin" "${BUILD_INSTALL_PATH}/lib" -type f \( -path "${BUILD_INSTALL_PATH}/bin/*" -o -name "*.so" \))
+    if [[ ${#strip_files[@]} -gt 0 ]]; then
+        clang_major_version=$("$c_compiler_used" --version | sed -nE 's/.*version ([0-9]+).*/\1/p' | head -n1)
+        llvm_strip_path=$(command -v "llvm-strip-${clang_major_version}" || command -v llvm-strip || true)
+        if [[ -z "$llvm_strip_path" ]]; then
+            echo "No compatible llvm-strip found for installed artifacts (Clang ${clang_major_version})" >&2
+            exit 1
+        fi
+        echo "Stripping installed artifacts with $llvm_strip_path"
+        for f in "${strip_files[@]}"; do
+            "$llvm_strip_path" -s "$f"
+        done
+    else
+        echo "No installed artifacts to strip"
+    fi
 fi
 
 if [[ ${IS_CLANG_BUILD_ANALYZER} == ON ]]; then
