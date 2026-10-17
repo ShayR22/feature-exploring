@@ -1,0 +1,8 @@
+project(libs)
+add_subdirectory(func_measuring)
+add_subdirectory(io_uring_recorder)
+add_subdirectory(arena_allocator)
+add_subdirectory(btree_iterators)
+add_subdirectory(memory_pool)
+add_subdirectory(type_erasure_dispatcher)
+add_subdirectory(type_erasure)

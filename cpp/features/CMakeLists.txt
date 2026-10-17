@@ -1,8 +1,6 @@
 cmake_minimum_required(VERSION 3.22)
 project("features")
 
-add_subdirectory("func_measuring")
-add_subdirectory("io_uring_recorder")
 if(BUILD_EXPERIMENTS)
     add_subdirectory("arena_allocator")
     add_subdirectory("base_file_name")

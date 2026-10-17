@@ -7,11 +7,11 @@ if(NOT URING_LIBRARY OR NOT URING_INCLUDE_DIR)
 endif()
 
 add_library(io_uring_recorder STATIC
-    srcs/executor/io_uring_executor.cpp
-    srcs/executor/request_pool.cpp
-    srcs/io/io_uring.cpp
-    srcs/recorder/io_uring_recorder.cpp
-    srcs/rotation/rotating_recorder.cpp
+    src/executor/io_uring_executor.cpp
+    src/executor/request_pool.cpp
+    src/io/io_uring.cpp
+    src/recorder/io_uring_recorder.cpp
+    src/rotation/rotating_recorder.cpp
 )
 
 add_library(io_uring_recorder::io_uring_recorder ALIAS io_uring_recorder)
@@ -23,7 +23,7 @@ target_include_directories(io_uring_recorder
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
         $<INSTALL_INTERFACE:include>
     PRIVATE
-        ${CMAKE_CURRENT_SOURCE_DIR}/srcs
+        ${CMAKE_CURRENT_SOURCE_DIR}/src
         ${URING_INCLUDE_DIR}
 )
 
@@ -41,3 +41,7 @@ install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/include/"
     OPTIONAL DESTINATION ${INSTALL_DIR}/include
     FILES_MATCHING PATTERN "*.h*"
 )
+
+if(BUILD_TESTS)
+    add_subdirectory(tests)
+endif()

@@ -47,12 +47,13 @@ include("${CMAKE_HELPERS_PATH}/install_library.cmake")
 # Relative install destinations follow CMAKE_INSTALL_PREFIX.
 set(INSTALL_DIR ".")
 
-add_subdirectory("features")
 if(BUILD_TESTS)
-    add_subdirectory("test_support")
+    add_subdirectory("tests/gtest_wrapper")
 endif()
+add_subdirectory("libs")
 # Existing standalone experiments still reside here until the layout migration.
-if(BUILD_TESTS OR BUILD_EXPERIMENTS)
+if(BUILD_EXPERIMENTS)
+    add_subdirectory("features")
     add_subdirectory("tests")
 endif()
 
