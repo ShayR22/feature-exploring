@@ -1,0 +1,21 @@
+services:
+  cppbuilder:
+    build:
+      context: .
+      # Supplied by install.sh from the host user and group IDs.
+      args:
+        DEV_UID: ${DEV_UID:-1000}
+        DEV_GID: ${DEV_GID:-1000}
+    image: feature-exploring-cpp:local
+    container_name: ${CONTAINER_NAME:-cpp_builder}
+    # Keep the container available for build.sh's docker exec calls.
+    command: ["sleep", "infinity"]
+    # Docker's default seccomp policy denies io_uring_setup and ptrace.
+    security_opt:
+      - seccomp=unconfined
+    cap_add:
+      - SYS_PTRACE
+    volumes:
+      - ${WORKSPACE_ROOT:?Run install.sh}:/workspace
+      - ${CONAN_CACHE_DIR:?Run install.sh}:/home/builder/.conan2
+      - ${CCACHE_CACHE_DIR:?Run install.sh}:/home/builder/.ccache

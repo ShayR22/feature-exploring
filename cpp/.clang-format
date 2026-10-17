@@ -1,0 +1,69 @@
+---
+# Use clang-format 20, provided by the development container.
+Language: Cpp
+BasedOnStyle: LLVM
+
+ColumnLimit: 120
+IndentWidth: 4
+TabWidth: 4
+UseTab: Never
+AccessModifierOffset: -4
+NamespaceIndentation: None
+FixNamespaceComments: true
+
+BreakBeforeBraces: Attach
+IndentCaseLabels: true
+PointerAlignment: Left
+DerivePointerAlignment: false
+ReferenceAlignment: Pointer
+
+# One line if it fits; otherwise first arg stays after '(' and each following arg on its own line.
+AlignAfterOpenBracket: Align
+BinPackArguments: false
+BinPackParameters: false
+AllowAllArgumentsOnNextLine: false
+AllowAllParametersOfDeclarationOnNextLine: false
+PenaltyBreakAssignment: 100
+PenaltyBreakBeforeFirstCallParameter: 1
+PenaltyReturnTypeOnItsOwnLine: 200
+
+AlignConsecutiveAssignments:
+  Enabled: true
+  AcrossEmptyLines: false
+  AcrossComments: false
+  AlignCompound: false
+  PadOperators: true
+AlignConsecutiveDeclarations: None
+AlignConsecutiveMacros: None
+
+BreakConstructorInitializers: BeforeColon
+PackConstructorInitializers: CurrentLine
+BreakTemplateDeclarations: Yes
+
+AllowShortLambdasOnASingleLine: All
+AllowShortFunctionsOnASingleLine: None
+AllowShortIfStatementsOnASingleLine: Never
+AllowShortLoopsOnASingleLine: false
+AllowShortBlocksOnASingleLine: Never
+AllowShortEnumsOnASingleLine: false
+
+SortIncludes: CaseSensitive
+IncludeBlocks: Regroup
+IncludeCategories:
+  # <atomic>, <vector>, <stdint.h> — no slash
+  - Regex: '^<[a-zA-Z0-9_]+(\.h)?>$'
+    Priority: 1
+  # Third-party
+  - Regex: '^<(boost|spdlog|nlohmann|fmt|gtest|gmock|pybind11)/'
+    Priority: 2
+  # Project headers, such as <io_uring_recorder/io_uring_recorder.hpp>
+  - Regex: '.*'
+    Priority: 3
+
+SpaceBeforeParens: ControlStatements
+SpaceBeforeRangeBasedForLoopColon: false
+SpacesBeforeTrailingComments: 1
+Cpp11BracedListStyle: true
+Standard: Latest
+ReflowComments: true
+...
