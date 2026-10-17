@@ -1,0 +1,4 @@
+if(ENABLE_CLANG_TIDY)
+    find_program(CLANG_TIDY_20_EXE NAMES clang-tidy-20 REQUIRED)
+    set(CLANG_TIDY_OPTIONS "${CLANG_TIDY_20_EXE}")
+endif()

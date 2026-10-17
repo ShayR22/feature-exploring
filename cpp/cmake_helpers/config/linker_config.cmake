@@ -1,0 +1,10 @@
+# Use the LLVM linker alongside Clang.
+if(BUILD_LINKER STREQUAL "lld")
+    find_program(LLD_LINKER NAMES ld.lld-18 ld.lld REQUIRED)
+    add_link_options("-fuse-ld=${LLD_LINKER}")
+elseif(BUILD_LINKER STREQUAL "mold")
+    find_program(MOLD_LINKER mold REQUIRED)
+    add_link_options("-fuse-ld=${MOLD_LINKER}")
+else()
+    message(FATAL_ERROR "Unsupported BUILD_LINKER '${BUILD_LINKER}'; choose lld or mold")
+endif()

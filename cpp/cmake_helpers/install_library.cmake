@@ -1,14 +1,20 @@
+include_guard(GLOBAL)
 
-message(VERBOSE "setting ${PROJECT_NAME} install to ${INSTALL_DIR}/lib/${PROJECT_NAME}")
-install(TARGETS ${PROJECT_NAME}
-    ARCHIVE DESTINATION ${INSTALL_DIR}/lib/${PROJECT_NAME}
-    OPTIONAL
-    LIBRARY DESTINATION ${INSTALL_DIR}/lib/${PROJECT_NAME}
-    OPTIONAL
-)
+function(install_project_library target)
+    if(NOT TARGET "${target}")
+        message(FATAL_ERROR "install_project_library: target '${target}' does not exist")
+    endif()
+    message(VERBOSE "setting ${target} install to ${INSTALL_DIR}/lib/${target}")
+    install(TARGETS "${target}"
+        ARCHIVE DESTINATION "${INSTALL_DIR}/lib/${target}"
+        OPTIONAL
+        LIBRARY DESTINATION "${INSTALL_DIR}/lib/${target}"
+        OPTIONAL
+    )
 
-install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/include
-    OPTIONAL
-    DESTINATION ${INSTALL_DIR}/lib/${PROJECT_NAME}
-    FILES_MATCHING PATTERN "*.h*"
-)
+    install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/include/"
+        OPTIONAL
+        DESTINATION "${INSTALL_DIR}/include"
+        FILES_MATCHING PATTERN "*.h*"
+    )
+endfunction()

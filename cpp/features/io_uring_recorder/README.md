@@ -17,26 +17,23 @@ writes to the same rotating path overlap.
 
 ## Dependencies and build
 
-On Linux, install CMake, a C++20 Clang toolchain, `liburing` development headers/library, `clang-tidy`, and
-`include-what-you-use`. The shared wrapper fetches GoogleTest and GoogleMock v1.14.0 at configure time. The build script
-enables IWYU and clang-tidy by default and prints the selected tool paths and compiler/IWYU versions. The tools
-must parse the project's C++20 sources and standard library; the ordinary build exercises both against the actual
-translation units.
-
-From `cpp/`, build the test target in Debug or Release:
+The workspace's development container supplies Clang/LLVM 18, C++20, and
+liburing. Conan 2 supplies GoogleTest/GoogleMock 1.16.0. IWYU and clang-tidy
+are optional and off by default. Start the container and build from `cpp/`:
 
 ```bash
-./build.sh --build --parallel-build --build-debug --target io_uring_recorder_test
-./build.sh --build --parallel-build --target io_uring_recorder_test
+./setup/install.sh --all
+./build.sh --all --jobs 4 --build-type Debug --target io_uring_recorder_test
+./build.sh --all --jobs 4 --target io_uring_recorder_test
+./build.sh --install
 ```
 
-Both the feature and test executable are part of the default target set. `build.sh` does not need `sudo` for build
-directory operations. Release stripping runs only when the install tree contains binaries or shared libraries; a
-normal build with no installed artifacts does not require `llvm-strip`. To install artifacts, use the script's
-`--install` option and provide system privileges separately if the chosen install destination requires them.
+`build.sh` enters the container and forwards to `scripts/docker_build.sh`. The
+feature and test executable remain in the default target set. Installation
+defaults to `build/<lowercase build type>/install` unless overridden.
 
 The recorder library links liburing privately. Configuration reports a clear error when the liburing headers or
-library are missing. No CTest registration or GoogleTest discovery is used.
+library are missing. `build.sh --unittests` runs the built `bin/*_test` executables directly.
 
 ## Tests and reports
 
@@ -44,13 +41,13 @@ The executable has one shared main and exactly two wrapper test cases. Run these
 are created under that directory:
 
 ```bash
-./build/tests/io_uring_recorder/io_uring_recorder_test \
+./build/release/bin/io_uring_recorder_test \
   --gtest_filter='IoUringRecorder_Validation.*'
 
-./build/tests/io_uring_recorder/io_uring_recorder_test \
+./build/release/bin/io_uring_recorder_test \
   --gtest_filter='IoUringRecorder_Benchmark.*'
 
-./build/tests/io_uring_recorder/io_uring_recorder_test
+./build/release/bin/io_uring_recorder_test
 ```
 
 The Validation case checks known direct contents after the caller releases its sample, rotation wraparound, the final
@@ -79,12 +76,12 @@ The wrapper's report retention is opt-in. Its original include shim was empty; t
 that header with GoogleTest and iostream includes needed by the wrapper. The GNU variadic-macro warning exception is
 limited to the test executable; the recorder and existing repository targets retain their analysis settings.
 
-The shared clang-tidy configuration is unchanged from the original repository.
+The workspace provides optional clang-tidy and include-what-you-use analysis.
 
 `io_uring_setup` must be permitted by the Linux host and its security policy. The test executable can compile
 successfully on a host that denies io_uring, but runtime validation and benchmarking require an allowed host.
 
-## Toolchain verified during integration
+## Historical integration verification
 
 The integration was built with Clang 18.1.8, clang-tidy 14.0.0, IWYU 0.17 (based on Clang 13.0.1), CMake 3.22.1,
 liburing 2.1, and GoogleTest/GoogleMock 1.14.0. Both analysis tools ran on the recorder, wrapper, and test targets in

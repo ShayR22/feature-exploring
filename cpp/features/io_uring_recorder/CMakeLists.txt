@@ -1,3 +1,4 @@
+project(io_uring_recorder)
 find_package(Threads REQUIRED)
 find_library(URING_LIBRARY NAMES uring)
 find_path(URING_INCLUDE_DIR NAMES liburing.h)
@@ -30,18 +31,13 @@ target_link_libraries(io_uring_recorder PRIVATE ${URING_LIBRARY} Threads::Thread
 
 target_compile_options(io_uring_recorder PRIVATE -Wall -Wextra -Wpedantic -Werror)
 
-if(USE_IWYU)
-    set_property(TARGET io_uring_recorder PROPERTY CXX_INCLUDE_WHAT_YOU_USE "${IWYU_PATH_AND_OPTIONS}")
-endif()
-if(USE_CLANG_TIDY)
-    set_target_properties(io_uring_recorder PROPERTIES CXX_CLANG_TIDY "${CLANG_TIDY_PATH_WITH_OPTIONS}")
-endif()
+enable_project_tools(${PROJECT_NAME})
 
 install(TARGETS io_uring_recorder
     ARCHIVE DESTINATION ${INSTALL_DIR}/lib/io_uring_recorder OPTIONAL
     LIBRARY DESTINATION ${INSTALL_DIR}/lib/io_uring_recorder OPTIONAL
 )
-install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/include"
-    OPTIONAL DESTINATION ${INSTALL_DIR}/lib/io_uring_recorder
+install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/include/"
+    OPTIONAL DESTINATION ${INSTALL_DIR}/include
     FILES_MATCHING PATTERN "*.h*"
 )

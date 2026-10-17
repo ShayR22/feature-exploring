@@ -1,0 +1,11 @@
+{
+    "version": "0.5",
+    "requires": [
+        "spdlog/1.11.0#6817f665b0da46fc580a2802807475de%1767604747.761",
+        "gtest/1.16.0#f474c77ccf9e9534220374740ece47df%1786446851.972",
+        "fmt/10.0.0#cccf70549db7eb188bbaf16aede8ac77%1785754578.895"
+    ],
+    "build_requires": [],
+    "python_requires": [],
+    "config_requires": []
+}

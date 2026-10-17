@@ -4,5 +4,5 @@ add_executable(${PROJECT_NAME}
     srcs/main.cpp
 )
 
-include(${CMAKE_INSTALL_BIN_HELPER})
-include(${CMAKE_TOOLS_PATH})
+install_project_binary(${PROJECT_NAME})
+enable_project_tools(${PROJECT_NAME})

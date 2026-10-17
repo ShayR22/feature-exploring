@@ -2,12 +2,10 @@ CMakeLists.txt.user
 CMakeCache.txt
 CMakeFiles
 CMakeScripts
-Testing
 Makefile
 cmake_install.cmake
 install_manifest.txt
 compile_commands.json
-CTestTestfile.cmake
 .vscode
 _deps
 **/build
@@ -15,3 +13,6 @@ _deps
 build/
 build
 cpp/report_*/
+
+# Conan generates user presets beside the dependency recipe.
+cpp/conan/CMakeUserPresets.json

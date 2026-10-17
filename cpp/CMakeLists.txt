@@ -1,59 +1,60 @@
 cmake_minimum_required(VERSION 3.22)
-project("feature-exploring")
+project("feature-exploring" LANGUAGES CXX)
 
-# User parameters
-set(CMAKE_BUILD_TYPE
-    ""
-    CACHE
-    STRING
-    "Build type - Release/Debug"
-)
+# Build options apply to the container build and direct CMake invocations.
+option(BUILD_EXPERIMENTS "Build standalone experiments" ON)
+option(BUILD_TESTS "Build library tests" ON)
+option(USE_UNITY_BUILD "Enable opted-in Unity builds" OFF)
+option(ENABLE_SANITIZERS "Enable AddressSanitizer and UBSan" OFF)
+option(ENABLE_THREAD_SANITIZER "Enable ThreadSanitizer in a separate build" OFF)
+set(BUILD_LINKER "lld" CACHE STRING "Linker: lld or mold")
+set_property(CACHE BUILD_LINKER PROPERTY STRINGS lld mold)
+option(ENABLE_CLANG_TIDY "Enable clang-tidy checks during compilation" OFF)
+option(ENABLE_IWYU "Enable include-what-you-use analysis" OFF)
+option(ENABLE_CCACHE "Enable ccache for faster rebuilds" OFF)
+option(DISABLE_PCH "Disable precompiled headers" ON)
 
-set(BUILD_INSTALL_PATH
-    ""
-    CACHE
-    STRING
-    "Build install path, path to where under build directory where targets would be installed"
-)
-
-# User parameters validations
-message(STATUS "CMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}")
-if (NOT CMAKE_BUILD_TYPE)
-    message(FATAL_ERROR "no build type given. please add -DCMAKE_BUILD_TYPE=Release|Debug")
+if(NOT CMAKE_BUILD_TYPE)
+    set(CMAKE_BUILD_TYPE Release CACHE STRING "Build type" FORCE)
+endif()
+if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
+    string(TOLOWER "${CMAKE_BUILD_TYPE}" build_type_directory)
+    set(CMAKE_INSTALL_PREFIX "${CMAKE_SOURCE_DIR}/build/${build_type_directory}/install"
+        CACHE PATH "Installation directory" FORCE)
 endif()
 
-message(STATUS "BUILD_INSTALL_PATH=${BUILD_INSTALL_PATH}")
-if (NOT BUILD_INSTALL_PATH)
-    message(FATAL_ERROR "no build install path given. please add -DBUILD_INSTALL_PATH=install")
-endif()
-
-########################################
-
-# set tools and helper cmake used by project
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib")
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib")
+# Global configuration and per-target opt-in helpers.
 set(CMAKE_HELPERS_PATH "${CMAKE_SOURCE_DIR}/cmake_helpers")
-set(CMAKE_TOOLS_CONFIG_PATH "${CMAKE_HELPERS_PATH}/tool_helper_config.cmake")
-set(CMAKE_TOOLS_PATH "${CMAKE_HELPERS_PATH}/tool_helper.cmake")
+set(CMAKE_CONFIG_PATH "${CMAKE_HELPERS_PATH}/config")
+set(CMAKE_TARGET_PATH "${CMAKE_HELPERS_PATH}/per_target")
+include("${CMAKE_CONFIG_PATH}/compiler_flags.cmake")
+include("${CMAKE_CONFIG_PATH}/linker_config.cmake")
+include("${CMAKE_CONFIG_PATH}/sanitizers.cmake")
+include("${CMAKE_CONFIG_PATH}/ccache_config.cmake")
+include("${CMAKE_CONFIG_PATH}/clang_tidy_config.cmake")
+include("${CMAKE_CONFIG_PATH}/iwyu_config.cmake")
+set(CMAKE_PCH_TARGET "${CMAKE_TARGET_PATH}/pch.cmake")
+include("${CMAKE_TARGET_PATH}/unity.cmake")
 
-message(VERBOSE "CMAKE_TOOLS_CONFIG_PATH=${CMAKE_TOOLS_CONFIG_PATH}")
-message(VERBOSE "CMAKE_TOOLS_PATH=${CMAKE_TOOLS_PATH}")
+# Load tool and installation function definitions once for all subdirectories.
+include("${CMAKE_HELPERS_PATH}/tool_helper.cmake")
+include("${CMAKE_HELPERS_PATH}/install_binary.cmake")
+include("${CMAKE_HELPERS_PATH}/install_library.cmake")
 
-
-# configure tools
-if (${USE_IWYU} OR ${USE_CLANG_TIDY})
-    message(STATUS "Configuring CMAKE_TOOLS_CONFIG_PATH=${CMAKE_TOOLS_CONFIG_PATH}")
-    include(${CMAKE_TOOLS_CONFIG_PATH})
-endif()
-
-set(CMAKE_INSTALL_BIN_HELPER "${CMAKE_HELPERS_PATH}/install_binary.cmake")
-set(CMAKE_INSTALL_LIB_HELPER "${CMAKE_HELPERS_PATH}/install_library.cmake")
-
-message(VERBOSE "CMAKE_INSTALL_BIN_HELPER=${CMAKE_INSTALL_BIN_HELPER}")
-message(VERBOSE "CMAKE_INSTALL_LIB_HELPER=${CMAKE_INSTALL_LIB_HELPER}")
-
-# Set the install destination to the build directory
-set(INSTALL_DIR "${BUILD_INSTALL_PATH}")
-message(VERBOSE "INSTALL_DIR=${INSTALL_DIR}")
+# Relative install destinations follow CMAKE_INSTALL_PREFIX.
+set(INSTALL_DIR ".")
 
 add_subdirectory("features")
-add_subdirectory("test_support")
-add_subdirectory("tests")
+if(BUILD_TESTS)
+    add_subdirectory("test_support")
+endif()
+# Existing standalone experiments still reside here until the layout migration.
+if(BUILD_TESTS OR BUILD_EXPERIMENTS)
+    add_subdirectory("tests")
+endif()
+
+# Apply exceptions after all targets have been defined.
+include("${CMAKE_CONFIG_PATH}/warning_suppressions.cmake")

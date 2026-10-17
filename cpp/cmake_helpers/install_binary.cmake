@@ -1,7 +1,13 @@
-# install_dir/bin/project_name/executable
+# install_dir/bin/target_name/executable
+include_guard(GLOBAL)
 
-message(VERBOSE "setting ${PROJECT_NAME} install to ${INSTALL_DIR}/bin/${PROJECT_NAME}")
-install(TARGETS ${PROJECT_NAME}
-    RUNTIME DESTINATION ${INSTALL_DIR}/bin/${PROJECT_NAME}
-    OPTIONAL
-)
+function(install_project_binary target)
+    if(NOT TARGET "${target}")
+        message(FATAL_ERROR "install_project_binary: target '${target}' does not exist")
+    endif()
+    message(VERBOSE "setting ${target} install to ${INSTALL_DIR}/bin/${target}")
+    install(TARGETS "${target}"
+        RUNTIME DESTINATION "${INSTALL_DIR}/bin/${target}"
+        OPTIONAL
+    )
+endfunction()

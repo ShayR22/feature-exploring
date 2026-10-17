@@ -1,0 +1,4 @@
+if(ENABLE_CCACHE)
+    find_program(CCACHE_PROGRAM ccache REQUIRED)
+    set(CMAKE_CXX_COMPILER_LAUNCHER "${CCACHE_PROGRAM}")
+endif()
