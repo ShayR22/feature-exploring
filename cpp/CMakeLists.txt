@@ -48,13 +48,11 @@ include("${CMAKE_HELPERS_PATH}/install_library.cmake")
 set(INSTALL_DIR ".")
 
 if(BUILD_TESTS)
-    add_subdirectory("tests/gtest_wrapper")
+    add_subdirectory("tests")
 endif()
 add_subdirectory("libs")
-# Existing standalone experiments still reside here until the layout migration.
 if(BUILD_EXPERIMENTS)
-    add_subdirectory("features")
-    add_subdirectory("tests")
+    add_subdirectory("experiments")
 endif()
 
 # Apply exceptions after all targets have been defined.

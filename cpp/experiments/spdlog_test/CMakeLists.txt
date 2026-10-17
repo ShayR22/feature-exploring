@@ -1,0 +1,6 @@
+project(spdlog_test)
+find_package(spdlog CONFIG REQUIRED)
+add_executable(${PROJECT_NAME} src/main.cpp)
+target_link_libraries(${PROJECT_NAME} PRIVATE spdlog::spdlog)
+install_project_binary(${PROJECT_NAME})
+enable_project_tools(${PROJECT_NAME})
